@@ -1,6 +1,6 @@
 ---
 name: better-ui
-description: Design engineering principles for making interfaces feel polished. Use when building UI components, reviewing frontend code, implementing animations, hover states, shadows, borders, micro-interactions, enter/exit animations, choosing or reviewing icons, or any visual detail work. Triggers on UI polish, design details, "make it feel better", "feels off", stagger animations, border radius, optical alignment, image outlines, box shadows, icons, icon stroke weight, icon states, motion restraint.
+description: Design engineering principles for making interfaces feel polished. Use when building UI components, reviewing frontend code, implementing animations, hover states, shadows, borders, micro-interactions, enter/exit animations, choosing or reviewing icons, or any visual detail work. Triggers on UI polish, design details, "make it feel better", "feels off", stagger animations, border radius, optical alignment, image outlines, box shadows, icons, icon stroke weight, icon states.
 ---
 
 # Details that make interfaces feel better
@@ -11,14 +11,14 @@ When reviewing, slow the interface down: replay motion at 10% speed in the brows
 
 Preserve the project's component library, tokens, and density. Match its established motion language except where a principle below prescribes an exact interaction pattern.
 
-Typography (text wrapping, font rendering, tabular numbers, spacing) is covered by the `better-typography` skill; use that for anything text-related. Accessibility (hit areas, focus states, keyboard support, ARIA, reduced motion) is covered by the `better-accessibility` skill. Layout structure (grouping, spacing between sections, breakpoints, spatial RTL) is covered by the `better-layout` skill.
+Typography (text wrapping, font rendering, tabular numbers, spacing) is covered by the `better-typography` skill; use that for anything text-related. Accessibility (hit areas, focus states, keyboard support, ARIA, reduced motion) is covered by the `better-accessibility` skill. Layout structure (grouping, spacing between sections, breakpoints, spatial RTL) is covered by the `better-layout` skill. This skill assumes an animation belongs; whether it belongs at all, and what it costs the user at its trigger frequency, is covered by the `should-i-animate-this` skill.
 
 ## Quick Reference
 
 | Category | When to Use |
 | --- | --- |
 | [Surfaces](surfaces.md) | Border radius, optical alignment, shadows, image outlines |
-| [Animations](animations.md) | Interruptible animations, enter/exit transitions, icon animations, scale on press, motion restraint |
+| [Animations](animations.md) | Interruptible animations, enter/exit transitions, icon animations, scale on press |
 | [Icons](icons.md) | Icon stroke weight, states via `currentColor`, outline vs fill, sizing, RTL flipping |
 | [Performance](performance.md) | Transition specificity, `will-change` usage |
 
@@ -42,7 +42,7 @@ Use CSS transitions for interactive state changes: they can be interrupted mid-a
 
 ### 5. Split and Stagger Enter Animations
 
-For an infrequent staged entrance where sequence helps communicate hierarchy, break content into semantic chunks and stagger them by ~100ms instead of animating one container. Do not stagger routine, high-frequency interactions.
+For an infrequent staged entrance where sequence helps communicate hierarchy, break content into semantic chunks and stagger them by ~100ms instead of animating one container. Use `should-i-animate-this` to confirm the entrance is infrequent enough to earn a stagger.
 
 ### 6. Subtle Exit Animations
 
@@ -80,10 +80,6 @@ An icon next to text carries the text's optical weight: `1.5px` stroke beside re
 
 Icons use `currentColor` and get their states (hover, selected, disabled) from CSS color and opacity, never from separate assets. Outline variant is the default; fill variant marks the active state.
 
-### 15. Motion Restraint
-
-No custom animation on high-frequency interactions: the attention cost repeats on every trigger. Motion is never the only feedback channel; every animated state change also needs a static cue (color, icon, label).
-
 ## Common Mistakes
 
 | Mistake | Fix |
@@ -98,7 +94,6 @@ No custom animation on high-frequency interactions: the attention cost repeats o
 | Hairline icon beside bold text | Match the stroke width to the text weight |
 | Separate icon assets per state | One `currentColor` SVG, states via CSS |
 | Filled icons everywhere | Outline as default, fill only for the active state |
-| Entrance animation on every hover or keystroke | Instant feedback or ≤150ms opacity/color transition |
 
 ## Review Output Format
 

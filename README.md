@@ -15,6 +15,7 @@ A collection of agent skills that help with various parts of building a great in
 - [**better-accessibility**](skills/better-accessibility/SKILL.md): Focus states, keyboard support, ARIA, forms, screen readers, hit areas and motion.
 - [**better-layout**](skills/better-layout/SKILL.md): Layout structure, grouping, alignment, reading order, progressive disclosure and adaptive breakpoints.
 - [**better-writing**](skills/better-writing/SKILL.md): UX writing and interface copy, from button labels to errors, settings and empty states.
+- [**should-i-animate-this**](skills/should-i-animate-this/SKILL.md): A motion audit that judges an animation against how often it fires, then keeps, shortens or cuts it.
 
 ## Install
 
@@ -46,4 +47,12 @@ In Codex:
 $better-interface
 $better-interface quick
 $better-interface full checkout flow
+```
+
+`should-i-animate-this` is a separate, standalone audit. Point it at an animation, a component or a whole flow, and it returns a verdict per animation — keep, shorten, make one-sided, first-run only or cut.
+
+```text
+/should-i-animate-this
+/should-i-animate-this the context menu
+$should-i-animate-this the checkout flow
 ```
