@@ -17,17 +17,9 @@ Hover on anything the cursor sweeps across — list rows, table rows, menu items
 
 **400ms is the hard ceiling regardless of frequency.** Under 100ms reads as instant, 200–300ms is the working range, past 400ms the user perceives waiting rather than transition, past 1s they assume something is loading. Only distance justifies going over: a full-screen sheet travelling the height of the viewport, never a dropdown moving 8px.
 
-Exits should be shorter than their ceiling and may never be longer than their enter.
+Keep exits brief. Once intent is fulfilled attention has moved to the result, so a lingering exit only delays cleanup. The exit is free time only while nothing waits on it — the moment the user can't act until it finishes (clicking behind a closing modal, re-triggering the control), it's on the critical path and gets cut short.
 
 **Rule:** The ceiling is a maximum, not a target. Cut the duration before cutting the clarity.
-
-## Enter and exit are not symmetric
-
-A right-click menu in a canvas app, opening and closing at 300ms.
-
-Entering, the user is waiting to read the items, so every millisecond is latency. Leaving, the item is chosen and attention has moved to the result, so the motion is free.
-
-Verdict: `Make one-sided`. Instant open, 150ms close.
 
 ## Count what the code tells you
 
@@ -41,10 +33,11 @@ Never guess a number you can't observe. Triggers per day is unknowable from sour
 
 Every animation passes on its own; the finding is the total. Cut the transitions on steps that are pure progression, keep the ones carrying spatial meaning.
 
-**Stagger total.** A 50-row list, each row entering 40ms after the previous:
+**Stagger total.** A 50-row list, each row's 200ms entrance staggered 40ms after the previous:
 
 ```
-last row lands at 50 × 40ms = 2.0 seconds
+row 50 starts at (50 − 1) × 40ms = 1.96s
++ its own 200ms entrance → it lands at ~2.16 seconds
 ```
 
 The honest duration of a stagger is when the **last** item arrives. Verdict: `Cut`. Stagger is for a handful of semantic chunks in a hero, not for list rows.

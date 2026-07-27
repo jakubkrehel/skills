@@ -15,7 +15,7 @@ So the default is no. An animation earns its place by explaining something the e
 
 | Category | When to Use |
 | --- | --- |
-| [Frequency and duration](frequency-and-duration.md) | Ceilings by trigger frequency, enter/exit asymmetry, free vs. manufactured latency |
+| [Frequency and duration](frequency-and-duration.md) | Ceilings by trigger frequency, path and stagger totals, free vs. manufactured latency |
 | [Remedies](remedies.md) | Cut, shorten, first-run-only and keep, in code |
 
 ## Core Principles
@@ -32,47 +32,43 @@ Anything the cursor sweeps across — list rows, menu items — changes instantl
 
 Independent of frequency: under 100ms reads as instant, 200–300ms is the working range, past 400ms the user perceives waiting rather than transition. The only reason that justifies going over is distance — a full-screen surface, never a dropdown.
 
-### 4. Animate the Side the User Isn't Waiting On
-
-Entering is latency: the user is waiting to read or click. Leaving is free: the decision is already made. For anything frequent, default to instant open and animated close.
-
-### 5. Never Put Motion on the Critical Path
+### 4. Never Put Motion on the Critical Path
 
 If the user can't read the content or hit the control until it finishes, you invented latency. A 200ms delay before a menu is usable is worse than a 400ms flourish nobody waits on.
 
-### 6. Audit the Flow, Not the Component
+### 5. Audit the Flow, Not the Component
 
 Six steps at 200ms is 1.2 seconds added to a checkout, and every one passes on its own. Report the path total as its own finding.
 
-### 7. Motion Must Answer a Question the End State Can't
+### 6. Motion Must Answer a Question the End State Can't
 
 Origin, destination, continuity of identity, causality, duration. If it answers none of those it's decoration, which is allowed only where the frequency budget is generous.
 
-### 8. Delete It First
+### 7. Delete It First
 
 Remove the animation and use the interface. Not missing it is the answer; if the interface becomes confusing, the design is leaning on motion and needs a static cue, not a better transition.
 
-### 9. One Thing Moves at a Time
+### 8. One Thing Moves at a Time
 
 Motion only emphasizes when it's scarce. When several elements animate on one trigger, coordinate them as a single movement or cut all but the one that matters.
 
-### 10. Loops Are a Permanent Tax
+### 9. Loops Are a Permanent Tax
 
 Shimmer, pulsing dots, breathing gradients and rotating marks charge attention for as long as they're on screen. Reserve them for genuinely ongoing states: loading, recording, live data.
 
-### 11. Budget Scales Inversely With Dwell Time
+### 10. Budget Scales Inversely With Dwell Time
 
 A tool someone lives in all day approaches zero expressive motion, because speed is the feature there. A page seen once can spend.
 
-### 12. Never Animate the Primary Content on Load
+### 11. Never Animate the Primary Content on Load
 
 The user came for the content, and fading or sliding it in makes it unreadable for the duration. Animate the chrome instead. This applies with full force to scroll-triggered reveals in feeds, tables and lists.
 
-### 13. Never Animate an Interactive Target Into Position
+### 12. Never Animate an Interactive Target Into Position
 
 People aim ahead of the cursor, so a control that slides or reflows into place gets mis-clicked. Fade it in place, and don't animate height where something clickable sits below.
 
-### 14. Direct Manipulation Follows Input 1:1
+### 13. Direct Manipulation Follows Input 1:1
 
 While the user is dragging or swiping, the element tracks the input with no duration, easing or delay. Motion may resume when the gesture ends.
 
@@ -80,7 +76,6 @@ While the user is dragging or swiping, the element tracks the input with no dura
 
 | Mistake | Fix |
 | --- | --- |
-| Symmetric enter and exit on a frequently used control | Drop the enter, keep the exit |
 | Entrance animation on every hover or keystroke | Instant, or ≤150ms opacity/color |
 | Judging frequency from building or demoing it | Classify by what the interaction is, not how often you triggered it |
 | Each animation in a flow reviewed alone | Add up the whole path |

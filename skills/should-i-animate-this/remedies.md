@@ -26,20 +26,16 @@ If removing it leaves the user unable to tell what happened, the verdict isn't `
 
 ## First-run only
 
-For expressive motion that's good the first time and friction after. Persist a flag and pass `initial={false}` on every later visit.
+For expressive motion that's good the first time and friction after. Animate on the first visit; pass `initial={false}` on every later one so the element mounts in its final state with no entrance.
 
 ```tsx
-const [firstRun] = useState(() => {
-  const seen = localStorage.getItem("hero-intro-seen") === "1";
-  localStorage.setItem("hero-intro-seen", "1");
-  return !seen;
-});
-
 <motion.div
   initial={firstRun ? { opacity: 0, y: 12 } : false}
   animate={{ opacity: 1, y: 0 }}
 />
 ```
+
+`firstRun` comes from a persisted flag (e.g. `localStorage`, read on the client). Resolve it before the element mounts, or the entrance is gone by the time you learn it was the first run.
 
 Usually the honest compromise when the ceiling condemns an animation the team is attached to.
 
