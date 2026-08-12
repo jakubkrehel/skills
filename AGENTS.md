@@ -4,9 +4,11 @@ This file is the single source of guidance for coding agents working in this rep
 
 ## What this repository is
 
-A collection of agent skills for building great product interfaces (typography, colors, UI polish), distributed two ways: via `npx skills add jakubkrehel/skills`, and as the Claude Code plugin `interfaces` served by the marketplace in this same repository. It is documentation-only; there is no build, lint, or test tooling.
+A collection of agent skills for building great product interfaces (typography, colors, UI polish), distributed three ways: via `npx skills add jakubkrehel/skills`, as the Claude Code plugin `interfaces` served by the marketplace in this same repository, and as an opencode skill source. It is documentation-only; there is no build, lint, or test tooling.
 
 `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` define the plugin and its marketplace. Both are named `interfaces`, so plugin users invoke skills as `/interfaces:better-interface` while skills-CLI users invoke `/better-interface`; keep the README's Use section covering both forms. Skills are discovered from `skills/` automatically, so adding a skill needs no manifest change. Bump `version` in `plugin.json` when you want plugin users to receive an update. Run `claude plugin validate .` and `claude plugin validate .claude-plugin/plugin.json` after touching either manifest.
+
+For opencode, `opencode.json` registers the same `skills/` directory under `skills.paths` (the opencode loader scans it recursively for `**/SKILL.md`), and `.opencode/command/better-interface.md` plus `.opencode/command/interface-review.md` provide `/better-interface` and `/interface-review` slash wrappers around the two user-invoked skills. The opencode loader uses the same frontmatter as the Claude Code loader (`name` and `description`), so the skill files themselves are shared unchanged; no opencode-specific copy exists in `skills/`.
 
 ## Structure
 
@@ -47,5 +49,5 @@ When a concern crosses domains, keep the rule in the owner above and let other s
 - Skills instruct agents to match the target project's existing styling system (Tailwind vs. plain CSS vs. CSS-in-JS) rather than impose one.
 - Frontmatter `description` is the discovery surface; when adding or changing a skill's scope, update its trigger keywords accordingly.
 - Skills that own a domain use the `better-*` prefix. A user-invoked review entry point may drop it when a plainer name reads better on the command line, as `interface-review` does.
-- A skill's name appears in three places: its directory, its frontmatter `name`, and `display_name` in its `agents/openai.yaml`. Renaming means changing all three, then `grep`ing for the old name to confirm nothing survived.
+- A skill's name appears in three places: its directory, its frontmatter `name`, and `display_name` in its `agents/openai.yaml`. Renaming means changing all three, then `grep`ing for the old name to confirm nothing survived. For the two user-invoked review entry points, `better-interface` and `interface-review`, the name also appears as the command file name in `.opencode/command/`, which must mirror the skill's frontmatter `name` so the opencode slash wrapper and the skill stay in sync.
 - Prefer counts and lists that cannot go stale. Say "every skill in this repository" rather than a number the next skill invalidates.

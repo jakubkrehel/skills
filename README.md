@@ -40,6 +40,23 @@ npx skills add jakubkrehel/skills
 npx skills add jakubkrehel/skills --skill '*'
 ```
 
+### With opencode
+
+The repository is opencode-ready. Clone it and opencode discovers the skills automatically from the `skills/` directory (registered in the repo's `opencode.json`) plus the `/better-interface` and `/interface-review` slash commands from `.opencode/command/`.
+
+For skills available in every opencode project on a machine, clone the repository and point the global config at it:
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "skills": {
+    "paths": ["/path/to/skills-repo/skills"]
+  }
+}
+```
+
+Add the same `skills.paths` entry to a project's `opencode.json` to share them within a single project, or copy any skill folder under `.opencode/skills/`. Restart opencode after changing the config; skills are loaded at startup.
+
 ## Use
 
 Two skills are invoked by name. Use `better-interface` to review a screen, flow or feature, and `interface-review` to review what you changed: your uncommitted work, the current branch or a pull request.
@@ -74,6 +91,16 @@ $better-interface quick
 $better-interface full checkout flow
 $interface-review
 $interface-review quick pr 482
+```
+
+In opencode, as slash commands (provided by `.opencode/command/`, with the same argument forms as the Claude Code plugin):
+
+```text
+/better-interface
+/better-interface quick
+/better-interface full checkout flow
+/interface-review
+/interface-review quick pr 482
 ```
 
 The prefix only affects skills you invoke by name. The six domain skills are picked up automatically from context either way.
