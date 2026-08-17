@@ -16,6 +16,7 @@ A collection of agent skills that help you build a great interface. They cover U
 - [**better-accessibility**](skills/better-accessibility/SKILL.md): Focus states, keyboard support, ARIA, forms, screen readers, hit areas and motion.
 - [**better-layout**](skills/better-layout/SKILL.md): Layout structure, grouping, alignment, reading order, progressive disclosure and adaptive breakpoints.
 - [**better-writing**](skills/better-writing/SKILL.md): UX writing and interface copy, from button labels to errors, settings and empty states.
+- [**anti-ui-slop**](skills/anti-ui-slop/SKILL.md): A finish gate for specific, complete, and functional interfaces instead of generic generated UI.
 
 ## Install
 

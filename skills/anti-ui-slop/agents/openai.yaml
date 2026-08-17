@@ -1,0 +1,3 @@
+interface:
+  display_name: "Anti UI Slop"
+  short_description: "Keep generated interfaces specific, complete, and shippable"
