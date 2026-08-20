@@ -29,11 +29,39 @@ Works in Claude Code, Codex, Opencode and other agents. You can choose which ski
 npx skills add jakubkrehel/skills
 ```
 
+Skills installed this way keep their own names, so you run `/interface-review`.
+
 ### Claude Code plugin
 
-Installs every skill in this repository together and updates in place. Run these inside Claude Code:
+Installs every skill in this repository together and updates in place. It takes two steps inside Claude Code, run one at a time. First add the marketplace:
 
 ```text
 /plugin marketplace add jakubkrehel/skills
+```
+
+Wait for Claude Code to confirm the marketplace was added, then install the plugin it serves:
+
+```text
 /plugin install interfaces@interfaces
 ```
+
+Both halves of `interfaces@interfaces` are correct. The plugin and the marketplace serving it share a name.
+
+The same two steps work from a terminal, without the leading slash:
+
+```bash
+claude plugin marketplace add jakubkrehel/skills
+claude plugin install interfaces@interfaces
+```
+
+#### Running the skills
+
+Plugin skills are namespaced under the plugin, so run `/interfaces:interface-review` rather than `/interface-review`. Type `/interfaces:` and Claude Code lists every skill in this repository.
+
+#### If the install fails
+
+`Plugin "interfaces" not found in marketplace "interfaces"` means the marketplace step has not landed. It is what you get from pasting both commands at once, or from installing before the first command finished cloning. Run `/plugin marketplace update interfaces`, then install again.
+
+`Plugin "interfaces" not found in any configured marketplace` means the install command was missing its `@interfaces` half.
+
+`/plugin` with arguments needs a recent Claude Code. On an older one, run `claude plugin marketplace add jakubkrehel/skills` in a terminal instead.
