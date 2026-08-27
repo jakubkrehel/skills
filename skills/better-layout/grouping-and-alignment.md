@@ -1,16 +1,16 @@
-# Grouping & Alignment
+# Grouping and alignment
 
-How spacing, shapes, shared edges, and ordering communicate what belongs together and what matters most.
+How spacing, shapes, shared edges and ordering communicate what belongs together and what matters most.
 
-## Group with Space, Not Lines
+## Group with space, not lines
 
 Three tools create grouping, in order of preference:
 
-1. **Negative space**: the default. Related items sit close; unrelated items sit far apart.
-2. **Background shapes**: a card or filled container, when a group needs to read as one unit (a selectable row, a draggable card).
-3. **Separator lines**: last resort, for dense data where space would cost too much (tables, long settings lists).
+1. **Negative space**, the default. Related items sit close, unrelated ones far apart.
+2. **Background shapes**, a card or filled container, where a group must read as one unit such as a selectable row or a draggable card.
+3. **Separator lines**, a last resort for dense data where space costs too much, such as tables and long settings lists.
 
-The structural rule: the gap between groups must be at least 2× the gap within a group. If items inside a group are `8px` apart, groups need `16px`+ between them, otherwise the eye can't tell where one group ends.
+The structural rule is that the gap between groups is at least 2× the gap within one. At `8px` inside a group, groups need `16px`+ between them, or the eye can't tell where one ends.
 
 ```css
 /* Good: spacing alone communicates the grouping */
@@ -29,11 +29,11 @@ The structural rule: the gap between groups must be at least 2× the gap within 
 </div>
 ```
 
-When a separator is genuinely needed, keep it quiet: hairline width, low contrast, and never combined with a large gap (the gap already did the job).
+Where a separator is genuinely needed, keep it quiet: hairline width, low contrast, never combined with a large gap that already did the job.
 
-## Keep Controls Distinct from Content
+## Keep controls distinct from content
 
-Interactive elements need a visual signal that they're interactive: a background, a border, an underline, or placement in a consistent control zone (toolbar, footer row). A control styled identically to static text is invisible.
+Interactive elements need a visual signal: a background, a border, an underline, or placement in a consistent control zone such as a toolbar or footer row. A control styled identically to static text is invisible.
 
 ```html
 <!-- Bad: action looks exactly like the description text next to it -->
@@ -44,15 +44,15 @@ Interactive elements need a visual signal that they're interactive: a background
 <button class="font-medium text-blue-600">Upgrade now</button>
 ```
 
-The inverse also holds: don't give static elements control styling. A non-clickable badge shaped exactly like the buttons beside it collects dead clicks.
+The inverse holds too. A non-clickable badge shaped exactly like the buttons beside it collects dead clicks.
 
-## Align to Shared Edges
+## Align to shared edges
 
-Pick a small set of alignment edges and put everything on them; the eye tracks straight edges to scan content.
+Pick a small set of alignment edges and put everything on them, because the eye tracks straight edges to scan content.
 
-- Every stray edge (an icon 2px off the text edge, a card padded differently from its neighbor) reads as noise even when nobody can name the problem.
-- Use one consistent project spacing step to express hierarchy; `16px` is a useful default when no scale exists, and deeper nesting repeats the same step.
-- Numbers in tables right-align to the trailing edge (see `better-typography` for tabular figures); text left-aligns to the leading edge.
+- Every stray edge reads as noise even when nobody can name it: an icon 2px off the text edge, a card padded unlike its neighbor.
+- Use one project spacing step to express hierarchy. `16px` is a useful default where no scale exists, and deeper nesting repeats the same step.
+- Numbers in tables align to the trailing edge, text to the leading edge. Tabular figures are `better-typography`'s.
 
 ```css
 /* Good: one shared leading edge, one indent step */
@@ -65,7 +65,7 @@ Pick a small set of alignment edges and put everything on them; the eye tracks s
 .footer { padding-inline-start: 24px; }
 ```
 
-## Logical Properties, Not Physical
+## Logical properties, not physical
 
 Express direction-dependent horizontal position as leading/trailing so the layout mirrors automatically under `dir="rtl"`:
 
@@ -85,17 +85,17 @@ Express direction-dependent horizontal position as leading/trailing so the layou
 <div class="ml-4 pr-6 text-left">…</div>
 ```
 
-Reserve physical properties for things that genuinely refer to physical screen sides regardless of language, e.g. positioning relative to a device notch, or an element that must match a physical gesture direction.
+Reserve physical properties for things that refer to physical screen sides whatever the language, such as positioning against a device notch or matching a gesture direction.
 
-When the arrangement of elements encodes progression (star ratings, step indicators, progress bars), the sequence mirrors in RTL: stars fill from the trailing side. Flexbox and grid with logical properties mirror automatically; hand-positioned elements don't. Digit order inside numbers never reverses; that and other bidi text rules live in the `better-typography` skill.
+Where arrangement encodes progression, as in star ratings, step indicators and progress bars, the sequence mirrors in RTL and stars fill from the trailing side. Flexbox and grid with logical properties mirror automatically; hand-positioned elements do not. Digit order inside numbers never reverses, which with other bidi rules belongs to `better-typography`.
 
-## Order by Importance
+## Order by importance
 
 Readers scan top-to-bottom and leading-to-trailing. Place content accordingly:
 
-- The most important information sits near the top and the leading edge; the further down and trailing something sits, the less attention it gets.
-- Give essential information room. Don't bury the one number the user came for under rows of secondary detail; push secondary content into collapsed sections, tabs, or detail views.
-- Within a row, the identifying content (name, title) leads; metadata and actions trail.
+- The most important information sits near the top and the leading edge. The further down and trailing something sits, the less attention it gets.
+- Give essential information room. Never bury the one number the user came for under rows of secondary detail. Push that into collapsed sections, tabs, or detail views.
+- Within a row, identifying content leads and metadata and actions trail.
 
 ```html
 <!-- Good: primary fact first, detail demoted -->
@@ -112,12 +112,12 @@ Readers scan top-to-bottom and leading-to-trailing. Place content accordingly:
 </div>
 ```
 
-Think in **leading/trailing**, not left/right: combined with logical properties, the same hierarchy mirrors correctly in RTL locales.
+With logical properties, the same hierarchy mirrors correctly in RTL locales.
 
-## Don't Overload the Entry Point
+## Don't overload the entry point
 
 The first screenful is a table of contents, not the whole book. If everything is prominent, nothing is:
 
-- One primary action per view (see `better-colors` for how color enforces this).
+- One primary action per view. `better-colors` owns how color enforces it.
 - Group secondary actions behind a menu once they exceed two or three.
 - Prefer a short view that links deeper over a long view that shows everything at level one.

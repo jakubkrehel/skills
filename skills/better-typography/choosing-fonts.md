@@ -1,6 +1,6 @@
 # Choosing fonts
 
-Choosing a typeface, the right file format and understanding why fonts look the way they do.
+Choosing a typeface, the right file format and why fonts look the way they do.
 
 ## Choosing a typeface
 
@@ -16,20 +16,20 @@ Font families set the tone before the specific font does.
 
 CSS exposes `cursive` and `fantasy` keywords for the last two categories.
 
-"Display" in a font's name does not make it a display font. Fonts like SF Pro and Heldane ship a `Display` variant for large sizes and a `Text` variant for smaller sizes. Use the variant that matches the size you are setting.
+"Display" in a font's name does not make it a display font. SF Pro and Heldane ship a `Display` variant for large sizes and a `Text` variant for small ones. Use the variant matching the size you are setting.
 
 ### Rules
 
 - Fewer fonts is usually better. Rarely use more than three. Marketing pages can be more expressive than apps.
-- The same applies to sizes and weights. They define hierarchy, but overusing them hurts readability quickly.
-- Pair for contrast, not similarity. A serif headline with a sans body looks like a deliberate display/reading split. Two near-identical sans-serifs look like a mistake.
-- Thin weights are display-only. Below `18px`, stay at weight `400`+; Ultralight/Thin/Light (`100`–`300`) strokes disappear at text sizes and on low-DPI screens. Reserve them for `28px`+ display text, and even there check they hold up against the background.
+- The same applies to sizes and weights. They define hierarchy, and overusing them hurts readability fast.
+- Pair for contrast, not similarity. A serif headline over a sans body reads as a deliberate display and reading split; two near-identical sans-serifs read as a mistake.
+- Thin weights are display-only. Below `18px` stay at weight `400`+, because Ultralight, Thin and Light (`100`–`300`) strokes disappear at text sizes and on low-DPI screens. Reserve them for `28px`+ display text, and check even there that they hold against the background.
 
 ## Font family scope
 
-Applying or reviewing typography never requires a new typeface. Use the product's existing type system unless the task explicitly asks for a type change, and do not introduce a paid or proprietary face just to satisfy a review checklist. Rendering details like font smoothing, text wrapping and tabular numbers do not override the project's chosen font family.
+Applying or reviewing typography never requires a new typeface. Use the product's type system unless the task asks for a type change, and never introduce a paid or proprietary face to satisfy a checklist. Rendering details such as font smoothing, wrapping and tabular numbers do not override the project's font family.
 
-When a type change is asked for: a system-native macOS/iOS feel comes from the system stack; a commercial face such as Helvetica Now is a brand decision and keeps a practical fallback stack.
+When a type change is asked for, two routes. The system stack gives a native macOS and iOS feel. A commercial face such as Helvetica Now is a brand decision and still needs a fallback stack.
 
 ```css
 /* System-native macOS/iOS feel */
@@ -61,4 +61,4 @@ html {
 | Ascender | Part of a letter rising above the x-height |
 | Descender | Part dropping below the baseline |
 
-These measurements are why two fonts at the same `font-size` can look like different sizes. A font with a large x-height looks bigger.
+These measurements are why two fonts at the same `font-size` look like different sizes. A large x-height looks bigger.

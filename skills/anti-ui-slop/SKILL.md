@@ -45,4 +45,3 @@ Do not turn the gate into open-ended aesthetic polishing. Stop when the contract
 ## Reporting
 
 Report findings in [review-output.md](review-output.md). Each finding needs an exact location, current behavior, actionable change, severity, and verification status. Group repeated symptoms under their root cause and state what was inspected but intentionally left unchanged.
-

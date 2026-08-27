@@ -2,9 +2,9 @@
 
 Transition specificity and GPU compositing hints.
 
-## Transition Only What Changes
+## Transition only what changes
 
-Never use `transition: all` or Tailwind's `transition-all`. Always specify the exact properties that change. (Tailwind's bare `transition` maps to a curated default list of colors, opacity, shadow and transforms, not to `all`; still prefer naming exactly what changes.)
+Never use `transition: all` or Tailwind's `transition-all`. Always name the exact properties that change. Tailwind's bare `transition` maps to a curated list of colors, opacity, shadow and transforms rather than `all`, and naming what changes is still better.
 
 ### Why
 
@@ -12,7 +12,7 @@ Never use `transition: all` or Tailwind's `transition-all`. Always specify the e
 - Causes unexpected transitions on properties you didn't intend to animate (colors, padding, shadows)
 - Prevents browser optimizations
 
-### CSS Example
+### CSS example
 
 ```css
 /* Good: only transition what changes */
@@ -38,15 +38,15 @@ Never use `transition: all` or Tailwind's `transition-all`. Always specify the e
 <button className="transition-all duration-150 ease-out">
 ```
 
-### Tailwind `transition-transform` Note
+### Tailwind `transition-transform` note
 
-`transition-transform` in Tailwind maps to `transition-property: transform, translate, scale, rotate`, so it covers all transform-related properties, not just `transform`. Use this when you're only animating transforms. For multiple non-transform properties, use the bracket syntax: `transition-[scale,opacity,filter]`.
+`transition-transform` in Tailwind maps to `transition-property: transform, translate, scale, rotate`, covering every transform-related property rather than only `transform`. Use it when animating transforms alone. For several non-transform properties, use the bracket syntax `transition-[scale,opacity,filter]`.
 
-## Use `will-change` Sparingly
+## Use `will-change` sparingly
 
-`will-change` hints the browser to pre-promote an element to its own GPU compositing layer. Without it, the browser promotes the element only when the animation starts; that one-time layer promotion can cause a micro-stutter on the first frame.
+`will-change` hints the browser to pre-promote an element to its own GPU compositing layer. Without it the browser promotes only when the animation starts, and that one-time promotion can cause a micro-stutter on the first frame.
 
-This particularly helps when an element is changing `scale`, `rotation`, or moving around with `transform`. For other properties, it doesn't help much: the browser can't composite them on the GPU anyway.
+It helps most for `scale`, `rotation` and movement through `transform`. For other properties it does little, because the browser cannot composite them on the GPU anyway.
 
 ### Rules
 
@@ -72,7 +72,7 @@ This particularly helps when an element is changing `scale`, `rotation`, or movi
 }
 ```
 
-### Useful Properties
+### Useful properties
 
 | Property | GPU-compositable | Worth using `will-change` |
 | --- | --- | --- |
@@ -83,6 +83,6 @@ This particularly helps when an element is changing `scale`, `rotation`, or movi
 | `top`, `left`, `width`, `height` | No | No |
 | `background`, `border`, `color` | No | No |
 
-### When to Skip
+### When to skip
 
-Modern browsers are already good at optimizing on their own. Only add `will-change` when you notice first-frame stutter; Safari in particular benefits from it. Don't add it preemptively to every animated element; each extra compositing layer costs memory.
+Modern browsers optimize well on their own. Add `will-change` only when you see first-frame stutter, which Safari benefits from most. Never add it preemptively to every animated element, since each extra compositing layer costs memory.

@@ -1,10 +1,10 @@
-# Spacing & Adaptivity
+# Spacing and adaptivity
 
-Space between controls, margins against the viewport, hinting at off-screen content, and layouts that survive resizing and translation.
+Space between controls, margins against the viewport, hints at off-screen content and layouts that survive resizing and translation.
 
-## Breathing Room Between Targets
+## Breathing room between targets
 
-Controls placed too close together get mis-tapped and read as one unit. When the project has no established density scale, use these starting points:
+Controls placed too close get mis-tapped and read as one unit. Where the project has no density scale, start here:
 
 | Between | Starting point |
 | --- | --- |
@@ -12,7 +12,7 @@ Controls placed too close together get mis-tapped and read as one unit. When the
 | Around borderless controls (text buttons, icon buttons) | `24px` |
 | Unrelated control groups | `24px`+ (2× the intra-group gap) |
 
-Borderless controls usually need more clearance because nothing marks where one target ends and the next begins; the space itself is the boundary. Compact professional tools may use less when the hit areas remain distinct and do not overlap. Preserve an established, usable density instead of expanding controls solely to match these values.
+Borderless controls need more clearance, because nothing marks where one target ends and the next begins. The space is the boundary. Compact professional tools may use less where hit areas stay distinct and never overlap. Preserve an established, usable density rather than expanding controls to match these values.
 
 ```html
 <!-- Good: bordered buttons at 12px, icon buttons given room -->
@@ -29,11 +29,11 @@ Borderless controls usually need more clearance because nothing marks where one 
 </div>
 ```
 
-WCAG target-size requirements, larger usability targets, and pseudo-element expansion are covered by the `better-accessibility` skill; these clearances are in addition, so expanded hit areas never overlap.
+WCAG target-size requirements, larger usability targets and pseudo-element expansion belong to `better-accessibility`; these clearances are in addition, so expanded hit areas never overlap.
 
-## Inset Buttons from the Edges
+## Inset buttons from the edges
 
-In content layouts, buttons pressed accidentally against the viewport can look like system chrome and clip against curved corners or gesture zones. Keep them inside the layout margins. Edge-to-edge actions remain valid when they intentionally are application/platform chrome and account for safe areas:
+In content layouts, buttons pressed against the viewport look like system chrome and clip against curved corners or gesture zones. Keep them inside the layout margins. Edge-to-edge actions stay valid where they are deliberately platform chrome and account for safe areas:
 
 ```css
 /* Good: inset action bar */
@@ -52,17 +52,17 @@ In content layouts, buttons pressed accidentally against the viewport can look l
 }
 ```
 
-Start near `16px` inline margin on mobile when the project has no layout token; the button can still span the full content width inside those margins.
+Start near `16px` inline margin on mobile where the project has no layout token. The button can still span the full content width inside them.
 
-## Progressive Disclosure Needs an Affordance
+## Progressive disclosure needs an affordance
 
-Hiding complexity is good; hiding it without a cue is a trap. Every piece of off-screen or collapsed content needs a visible hint that it exists. Preserve the product's established scroll indicator or disclosure pattern; use the recipes below when no clear cue exists:
+Hiding complexity is good; hiding it without a cue is a trap. Every piece of off-screen or collapsed content needs a visible hint that it exists. Keep the product's established scroll indicator or disclosure pattern, and use the recipes below only where no cue exists:
 
 - **Peeking items.** In a horizontal scroller or carousel, size items so the next one peeks `16–32px` past the container edge. A row of cards that ends exactly at the edge looks complete, and nobody scrolls it.
-- **Disclosure controls.** Collapsed sections get a chevron or "Show more" control; the label states what's hidden ("Show 12 more results"), not just "More".
-- **Truncation cues.** Clamped text shows an ellipsis and a way to expand; see `better-typography` for truncation mechanics.
+- **Disclosure controls.** Collapsed sections get a chevron or "Show more", labelled with what is hidden: "Show 12 more results", not "More".
+- **Truncation cues.** Clamped text shows an ellipsis and a way to expand. Truncation mechanics are `better-typography`'s.
 
-The peeking-scroller recipe: the container's padding creates the peek, and snap points stay on the content edge.
+In the peeking-scroller recipe, the container's padding creates the peek and snap points stay on the content edge.
 
 ```css
 .scroller {
@@ -87,11 +87,11 @@ The peeking-scroller recipe: the container's padding creates the peek, and snap 
 </div>
 ```
 
-## Content Bleeds, Controls Float
+## Content bleeds, controls float
 
 The two layers behave differently at the edges:
 
-- **Content layer**: backgrounds, hero media, and scrollable lists extend to the viewport edges.
+- **Content layer**: backgrounds, hero media and scrollable lists extend to the viewport edges.
 - **Control layer**: text and controls stay inside the layout margins and safe areas, floating above the content.
 
 ```css
@@ -114,13 +114,13 @@ Sticky headers and floating action buttons account for safe areas:
 }
 ```
 
-## Hold Structure Until It Breaks
+## Hold structure until it breaks
 
 Breakpoints belong to the content, not the device catalog:
 
-- Break where the layout actually stops fitting (when the sidebar squeezes the content below its minimum measure, when the card grid drops below a usable column width), not at `768px` because a preset says so.
-- Collapse late. A layout that keeps its expanded structure as long as it genuinely fits stays stable and familiar; premature collapsing throws away space users paid for.
-- Prefer **container queries** for components: a card should adapt to the column it's in, not to the viewport.
+- Break where the layout actually stops fitting, not at `768px` because a preset says so. That is where the sidebar squeezes content below its minimum measure, or the card grid drops below a usable column width.
+- Collapse late. A layout keeping its expanded structure as long as it genuinely fits stays stable and familiar. Premature collapsing throws away space users paid for.
+- Prefer **container queries** for components. A card adapts to the column it is in, not to the viewport.
 
 ```css
 /* Good: component adapts to its container */
@@ -135,16 +135,16 @@ Breakpoints belong to the content, not the device catalog:
 }
 ```
 
-Test order: the smallest supported size and the largest first (those break first), then the sizes in between.
+Test the smallest and largest supported sizes first, since those break first, then the sizes between.
 
-## Plan for Growth and Clipping
+## Plan for growth and clipping
 
-Layouts fail in two directions: content grows, and viewports shrink.
+Layouts fail in two directions. Content grows, and viewports shrink.
 
-**String expansion varies substantially by language and source-string length.** Do not rely on one universal percentage. Rules:
+**String expansion varies by language and by source-string length.** Never rely on one universal percentage.
 
-- No fixed widths sized to English labels; use `max-width` plus wrapping.
-- No fixed heights on text containers; use `min-height` if a floor is needed.
+- No fixed widths sized to English labels. Use `max-width` plus wrapping.
+- No fixed heights on text containers. Use `min-height` where a floor is needed.
 - Buttons size themselves from their label (`padding-inline`), never a hardcoded width.
 - Test with pseudo-localization or a long-string locale before shipping.
 
@@ -156,4 +156,4 @@ Layouts fail in two directions: content grows, and viewports shrink.
 .button { width: 96px; overflow: hidden; }
 ```
 
-**Clipping:** never park critical actions where they can be cut off: the bottom edge of a resizable pane, below the fold of a fixed-height modal, behind an expanding keyboard. Keep primary actions in stable chrome: a sticky footer with safe-area padding, or the top of the view. If a modal's content scrolls, its action row doesn't.
+**Clipping.** Never park a critical action where it can be cut off: the bottom edge of a resizable pane, below the fold of a fixed-height modal, behind an expanding keyboard. Keep primary actions in stable chrome, a sticky footer with safe-area padding or the top of the view. Where a modal's content scrolls, its action row does not.

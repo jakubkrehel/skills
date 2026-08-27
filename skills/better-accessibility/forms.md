@@ -1,10 +1,10 @@
 # Forms
 
-Labels, autocomplete, error messaging, input types, and submit behavior.
+Labels, autocomplete, error messaging, input types and submit behavior.
 
 ## Labels
 
-Every control needs a programmatic label: `<label for>` pointing at the input's `id`, or a wrapping `<label>`. A placeholder is never a label: it disappears the moment the user types and usually fails contrast.
+Every control needs a programmatic label: `<label for>` pointing at the input's `id`, or a wrapping `<label>`. A placeholder is never a label. It disappears the moment the user types and usually fails contrast.
 
 ```html
 <!-- Good: explicit association -->
@@ -17,9 +17,9 @@ Every control needs a programmatic label: `<label for>` pointing at the input's 
 </label>
 ```
 
-Label and control must share one hit target: clicking the text "Send me updates" toggles the checkbox, with no dead zone between them. Mark required fields with native `required` plus a visible indicator explained once per form ("* required").
+Label and control share one hit target, so clicking "Send me updates" toggles the checkbox with no dead zone between them. Mark required fields with native `required` plus a visible indicator explained once per form ("* required").
 
-Placeholders, when used *in addition to* a label, show an example of the expected format: `placeholder="name@company.com"`.
+A placeholder used *in addition to* a label shows an example of the expected format: `placeholder="name@company.com"`.
 
 ## Error messaging
 
@@ -39,10 +39,10 @@ The complete pattern:
 
 - `aria-invalid="true"` on the failing field, removed once fixed.
 - `aria-describedby` links the field to its inline error so screen readers announce it with the field.
-- Errors render inline next to their fields, with an icon or text, never a red border alone (color-only cues fail).
+- Errors render inline beside their fields, with an icon or text. Never a red border alone, which is a color-only cue.
 - On submit, focus the first invalid field.
-- Allow incomplete submission so validation can surface; don't disable submit until valid (see below).
-- Accept free text and validate after; don't block typing or filter characters as the user types. Trim values before validating; autocomplete and text expansion add trailing spaces.
+- Allow incomplete submission so validation can surface. Never disable submit until valid (see below).
+- Accept free text and validate after. Never block typing or filter characters as the user types. Trim values before validating, because autocomplete and text expansion add trailing spaces.
 
 ## Autocomplete and input types
 
@@ -70,16 +70,15 @@ Correct `type` and `inputmode` pick the right mobile keyboard:
 | Money, decimals | `type="text" inputmode="decimal"` |
 | True numeric quantity | `type="number"` |
 
-Disable spellcheck on emails, codes, and usernames: `spellcheck="false"`.
+Disable spellcheck on emails, codes and usernames: `spellcheck="false"`.
 
 ## Never fight the user's tools
 
-- Never block paste in `<input>` or `<textarea>`; users paste passwords and one-time codes.
 - Stay compatible with password managers and 2FA autofill: real `<form>`, correct `autocomplete`, no fake inputs.
 
 ## Submit behavior
 
-- Keep submit enabled until the request starts, then disable it and show a spinner *while keeping the original label*: "Save" with a spinner, not a bare spinner. The label is what tells assistive tech which button is busy.
-- Announce results: success goes through a polite live region. For submit failures, focus the first invalid field; the focus move is the announcement, and reserve `role="alert"` for form-level errors not tied to a field (see [screen-readers.md](screen-readers.md)).
-- Warn on unsaved changes before navigation, and never lose typed input to a re-render; hydration must preserve focus and value.
+- Keep submit enabled until the request starts, then disable it and show a spinner *beside the original label*. "Save" with a spinner, not a bare spinner. The label is what tells assistive tech which button is busy.
+- Announce results. Success goes through a polite live region. On failure, focus the first invalid field, which is itself the announcement. Reserve `role="alert"` for form-level errors not tied to a field ([screen-readers.md](screen-readers.md)).
+- Warn on unsaved changes before navigation, and never lose typed input to a re-render. Hydration must preserve focus and value.
 - Enter submits from any focused input; in `<textarea>`, ⌘/Ctrl+Enter submits.
