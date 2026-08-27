@@ -40,7 +40,7 @@ Never use `transition: all` or Tailwind's `transition-all`. Always name the exac
 
 ### Tailwind `transition-transform` note
 
-`transition-transform` in Tailwind maps to `transition-property: transform, translate, scale, rotate`, covering every transform-related property rather than only `transform`. Use it when animating transforms alone. For several non-transform properties, use the bracket syntax `transition-[scale,opacity,filter]`.
+`transition-transform` in Tailwind v4 maps to `transition-property: transform, translate, scale, rotate`, covering every transform-related property rather than only `transform`. In v3 it maps to `transform` alone, and the standalone `translate`/`scale`/`rotate` utilities do not exist. Use it when animating transforms alone. For several non-transform properties, use the bracket syntax `transition-[scale,opacity,filter]`.
 
 ## Use `will-change` sparingly
 
