@@ -65,7 +65,7 @@ A theme flip changes color, background, border and shadow on nearly every elemen
 
 ## Transition only what changes
 
-Always name the exact properties: `transition-property: scale, opacity`. Tailwind's `transition-transform` covers `transform, translate, scale, rotate`.
+Always name the exact properties: `transition-property: scale, opacity`. Tailwind's `transition-transform` covers `transform, translate, scale, rotate` in v4; in v3 it covers only `transform`.
 
 ## Use `will-change` sparingly
 

@@ -80,7 +80,7 @@ Not every button needs it. Add a `static` prop that disables the scale where the
 Extract the scale class into a variable and apply it conditionally on a `static` prop:
 
 ```tsx
-const tapScale = "active:not-disabled:scale-[0.96]";
+const tapScale = "active:not-disabled:scale-[0.96]"; // not-* is Tailwind v4; on v3 use active:enabled:scale-[0.96]
 
 function Button({ static: isStatic, className, children, ...props }) {
   return (

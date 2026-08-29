@@ -74,7 +74,7 @@ In the peeking-scroller recipe, the container's padding creates the peek and sna
   scroll-snap-type: x mandatory;
 }
 .scroller > * {
-  flex: 0 0 calc(100% - 48px - 24px); /* container minus margins minus peek */
+  flex: 0 0 calc(100% - 12px); /* 100% is the content box — the 48px padding is already excluded; with the 12px gap the next card's leading 24px stays visible */
   scroll-snap-align: start;
 }
 ```

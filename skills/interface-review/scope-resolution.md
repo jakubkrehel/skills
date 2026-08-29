@@ -69,7 +69,7 @@ Exclude these and name what you excluded in the scope block. They are machine-au
 
 Two exceptions stay in scope. A **font file** added or swapped is a `better-typography` change. An **image** added to a component is a `better-ui` and `better-accessibility` change, through its `alt` text and its outline. Review the code that references them, not the bytes.
 
-Apply the exclusions as pathspecs so the file count in the scope block is the reviewed count. Two traps under-exclude silently. `*.lock` catches `yarn.lock` and `Cargo.lock` but not `package-lock.json` or `pnpm-lock.yaml`, so cover every suffix in the table. And `**` needs `glob` magic: without it `*` never crosses `/`, so `**/dist/**` excludes `packages/a/dist/` but misses a root-level `dist/`. Run the diff with and without the pathspecs and confirm the count dropped by exactly the files you named.
+Apply the exclusions as pathspecs so the file count in the scope block is the reviewed count. Two traps under-exclude silently. `*.lock` catches `yarn.lock` and `Cargo.lock` but not `package-lock.json` or `pnpm-lock.yaml`, so cover every suffix in the table. And `**` needs `glob` magic — though not because plain `*` stops at slashes: in git's default pathspec matching `*` crosses `/` freely, but `**/dist/**` still demands a literal `/` before `dist`, so it excludes `packages/a/dist/` while missing a root-level `dist/`. With `:(glob)`, a leading `**/` means "in every directory, including the root", so `:(glob)**/dist/**` catches both. Run the diff with and without the pathspecs and confirm the count dropped by exactly the files you named.
 
 ## Expanding to consumers
 

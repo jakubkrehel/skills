@@ -27,11 +27,11 @@ WCAG 2 is still required for formal WCAG 2.x conformance claims. Its luminance r
 
 | Content type | AA | AAA |
 | --- | --- | --- |
-| Normal text (<24px / <18.5px bold) | 4.5:1 | 7:1 |
-| Large text (≥24px / ≥18.5px bold) | 3:1 | 4.5:1 |
+| Normal text (<24px / <18.66px bold) | 4.5:1 | 7:1 |
+| Large text (≥24px / ≥18.66px bold) | 3:1 | 4.5:1 |
 | UI components and graphical objects | 3:1 | n/a |
 
-WCAG defines large text in points: 18pt ≈ `24px`, 14pt bold ≈ `18.5px`.
+WCAG defines large text in points: 18pt = `24px`, 14pt bold ≈ `18.66px` (1pt = 4/3 px). The rounding direction matters at the boundary: 18.6px bold text is still normal text and needs 4.5:1.
 
 When a project must claim WCAG conformance, WCAG is the gate and APCA is the tiebreaker for anything above it.
 
