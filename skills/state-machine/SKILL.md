@@ -28,7 +28,7 @@ The states are the branches the component already has. Read it and its data hook
 
 A state the code cannot reach is not a state. Do not add a branch to render one. Where the design shows a state the code lacks, list it as missing and leave it out.
 
-Write the set down before building, one line each, named the way the product talks about it: `empty`, `enterprise`, `member-no-access`. Group them under headings in the product's words, by what changes: `Data`, `Account`, or narrower ones such as `Connection` or `Access`. The switcher shows these groups. Say which kinds you dropped and why in one line. Combine kinds only where the code branches on the combination, such as `member-empty`, never as a cross product.
+Write the set down before building, one line each, named the way the product talks about it: `empty`, `enterprise`, `member-no-access`. Group them under headings in the product's words, by what changes. Use `Data` and `Account` or narrower ones such as `Connection` or `Access`. The switcher shows these groups. Say which kinds you dropped and why in one line. Combine kinds only where the code branches on the combination, such as `member-empty`, never as a cross product.
 
 ## 3. Build the throwaway page
 

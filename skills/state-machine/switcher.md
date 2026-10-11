@@ -66,7 +66,7 @@ A container query on the page picks the layout:
 - **Room for the list beside the component:** two columns, the list then the component at its production width. The list is sticky and scrolls inside itself once it outgrows the viewport, so it stays put while you flip states.
 - **No room:** the select sits above the component, in the page flow. A phone opens its own picker for it, which suits a long list.
 
-The page spans the full viewport width, because an app's layout often caps content near the component's own width. The breakpoint is the list, the gap, the page padding and the component added up: 280px plus the production width. The CSS below uses a 644px component: put the production width in `max-width` and the grid column, and set the query to 280px plus it.
+The page spans the full viewport width, because an app's layout often caps content near the component's own width. The query measures the page inside its padding, so the breakpoint is the list and the gap plus the component, which is 232px plus the production width. The CSS below uses a 644px component. Put the production width in `max-width` and the grid column, and set the query to 232px plus it.
 
 The list's 6px padding keeps its own scrolling from clipping focus rings. The reset strips the select's native arrow, so the chevron is what shows it opens.
 
@@ -179,8 +179,8 @@ The list's 6px padding keeps its own scrolling from clipping focus rings. The re
   color: rgb(255 255 255 / 0.6);
 }
 
-/* 208px list + 24px gap + 644px component + 48px page padding */
-@container state-page (min-width: 924px) {
+/* 208px list + 24px gap + 644px component */
+@container state-page (min-width: 876px) {
   .state-layout {
     display: grid;
     grid-template-columns: 208px 644px;
