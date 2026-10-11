@@ -10,7 +10,7 @@ One dark neutral surface, the system font stack and no project variables. It doe
 
 ## A grouped list, so it scales
 
-States sit in a vertical list, grouped under the headings **Find the states in the code** wrote them down by. A row of tabs runs off the screen past about seven states; a grouped list stays scannable at thirty.
+States sit in a vertical list under the group headings from **Find the states in the code**. A row of tabs runs off the screen past about seven states; a grouped list stays scannable at thirty.
 
 - Every group has a heading, even when there is only one, and every heading carries the same small arrow icon.
 - States and groups keep the order they were written down in.
@@ -64,7 +64,7 @@ States sit in a vertical list, grouped under the headings **Find the states in t
 A container query on the page picks the layout:
 
 - **Room for the list beside the component:** two columns, the list then the component at its production width. The list is sticky and scrolls inside itself once it outgrows the viewport, so it stays put while you flip states.
-- **No room:** the select sits above the component, in the page flow. A phone opens its own picker for it, which suits a long list.
+- **No room:** the select sits above the component, in the page flow. A phone opens its native menu for it, which suits a long list.
 
 The page spans the full viewport width, because an app's layout often caps content near the component's own width. The query measures the page inside its padding, so the breakpoint is the list and the gap plus the component, which is 232px plus the production width. The CSS below uses a 644px component. Put the production width in `max-width` and the grid column, and set the query to 232px plus it.
 
