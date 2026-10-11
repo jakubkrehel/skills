@@ -22,7 +22,7 @@ Each variant is a different answer to the same brief, on an axis this collection
 | Type | `better-typography` | Scale steps, weight contrast, measure |
 | Voice | `better-writing` | Labels, tone, how much copy |
 
-Pick **one primary axis** and give each variant a different position on it. Secondary choices follow from it rather than varying on their own. A dense variant may need a smaller type step, and that is coherence, not a second axis.
+Pick **one primary axis** and give each variant a different position on it. The axis names the picker's group heading. Secondary choices follow from it rather than varying on their own. A dense variant may need a smaller type step, and that is coherence, not a second axis.
 
 ## The floor every variant clears
 
@@ -71,7 +71,7 @@ This step is done when no two variants share a position and you can state each o
 
 Host the variants on the page that will actually contain the piece, with the real chrome, the real neighbours and realistic data.
 
-Select with a URL search param such as `?__variant=quiet`, so every variant is a link you can send someone. A floating control sets it; [picker.md](picker.md) holds the spec.
+Select with a URL search param such as `?__variant=quiet`, so every variant is a link you can send someone. A grouped list beside the piece sets it. Where there is no room beside the piece, it moves above it as a select with the same groups. [picker.md](picker.md) holds the spec.
 
 Render one variant at a time, full size. Thumbnails distort spacing and scale, and spacing is usually the thing you are choosing between.
 
@@ -113,4 +113,5 @@ Asked for another round instead, keep the harness and run **Name the axis before
 | The boldest variant skips keyboard or focus | Clear the floor or drop the direction |
 | A favourite marked in the table | State each variant's cost and let the user choose |
 | Picker restyled with the project's tokens | Keep it visibly outside the design system |
+| One long row of tabs, one per variant | A grouped list beside the piece that scrolls on its own; a select above it where the list does not fit |
 | Harness left behind after promotion | Delete it and search for the names and the param |
