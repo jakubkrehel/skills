@@ -75,12 +75,12 @@ In Tailwind, centralize the per-level classes in a component or `@layer base` ra
 
 /* trim only the top */
 .heading {
-  text-box: trim-start cap;
+  text-box: trim-start cap text;
 }
 
 /* trim only the bottom */
 .label {
-  text-box: trim-end alphabetic;
+  text-box: trim-end text alphabetic;
 }
 ```
 

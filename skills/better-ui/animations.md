@@ -29,27 +29,39 @@ Recipes for interruptible transitions, press feedback, first-render behavior, th
 ## Scale on press
 
 ```css
-.button {
-  transition-property: scale;
-  transition-duration: 150ms;
-  transition-timing-function: ease-out;
+.button:not(:disabled):active {
+  opacity: 0.8;
 }
 
-.button:not(:disabled):active {
-  scale: 0.96;
+@media (prefers-reduced-motion: no-preference) {
+  .button {
+    transition: scale 150ms ease-out;
+  }
+
+  .button:not(:disabled):active {
+    scale: 0.96;
+  }
 }
 ```
 
 ```tsx
 // Tailwind
-<button className="transition-transform duration-150 ease-out enabled:active:scale-[0.96]">
+<button className="transition-opacity duration-150 ease-out enabled:active:opacity-80 motion-safe:transition-transform motion-safe:duration-150 motion-safe:ease-out motion-safe:enabled:active:scale-[0.96]">
   Click me
 </button>
 
-// Motion
-<motion.button whileTap={disabled ? undefined : { scale: 0.96 }} disabled={disabled}>
-  Click me
-</motion.button>
+// Import motion and useReducedMotion from the package already used by the project.
+function PressableButton({ disabled, children }) {
+  const shouldReduceMotion = useReducedMotion();
+  return (
+    <motion.button
+      whileTap={disabled ? undefined : shouldReduceMotion ? { opacity: 0.8 } : { scale: 0.96 }}
+      disabled={disabled}
+    >
+      {children}
+    </motion.button>
+  );
+}
 ```
 
 ### Static prop pattern
@@ -57,13 +69,13 @@ Recipes for interruptible transitions, press feedback, first-render behavior, th
 Where the button has no variant API to carry the opt-out, apply the scale class conditionally on a `static` prop:
 
 ```tsx
-const tapScale = "enabled:active:scale-[0.96]";
+const tapScale = "motion-safe:active:not-disabled:scale-[0.96]"; // Tailwind v4; on v3 use motion-safe:enabled:active:scale-[0.96]
 
 function Button({ static: isStatic, className, children, ...props }) {
   return (
     <button
       className={cn(
-        "transition-transform duration-150 ease-out",
+        "transition-opacity duration-150 ease-out motion-safe:transition-transform motion-safe:duration-150 motion-safe:ease-out",
         !isStatic && tapScale,
         className,
       )}

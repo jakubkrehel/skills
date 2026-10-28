@@ -9,17 +9,22 @@ Check the project's `package.json`. Import from `"motion/react"` when `motion` i
 ## Motion
 
 ```tsx
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
-function IconButton({ isActive, icon: Icon }) {
+function IconButton({ isActive, ActiveIcon, InactiveIcon }) {
+  const Icon = isActive ? ActiveIcon : InactiveIcon;
+  const shouldReduceMotion = useReducedMotion();
+  const scale = shouldReduceMotion ? 1 : 0.25;
+  const blur = shouldReduceMotion ? "blur(0px)" : "blur(4px)";
+
   return (
     <button>
       <AnimatePresence initial={false} mode="popLayout">
         <motion.span
           key={isActive ? "active" : "inactive"}
-          initial={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+          initial={{ opacity: 0, scale, filter: blur }}
           animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-          exit={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+          exit={{ opacity: 0, scale, filter: blur }}
           transition={{ type: "spring", duration: 0.3, bounce: 0 }}
         >
           <Icon />

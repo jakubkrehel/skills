@@ -12,22 +12,29 @@ Recipes for staged entrances and the exits that follow them. For interactive sta
 ### Motion
 
 ```tsx
-const item = {
-  hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.3, ease: "easeOut" },
-  },
-};
+import { motion, useReducedMotion } from "motion/react"; // or "framer-motion"
 
 function PageHeader() {
+  const shouldReduceMotion = useReducedMotion();
+  const item = {
+    hidden: {
+      opacity: 0,
+      y: shouldReduceMotion ? 0 : 12,
+      filter: shouldReduceMotion ? "blur(0px)" : "blur(4px)",
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: shouldReduceMotion ? 0.15 : 0.3, ease: "easeOut" },
+    },
+  };
+
   return (
     <motion.div
       initial="hidden"
       animate="visible"
-      variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+      variants={{ visible: { transition: shouldReduceMotion ? {} : { staggerChildren: 0.1 } } }}
     >
       <motion.h1 variants={item}>Welcome</motion.h1>
       <motion.p variants={item}>A description of the page.</motion.p>
@@ -54,8 +61,10 @@ The hidden state lives in the `from` keyframe, so an item whose animation never 
   }
 }
 
-.stagger-item:nth-child(2) { animation-delay: 100ms; }
-.stagger-item:nth-child(3) { animation-delay: 200ms; }
+@media (prefers-reduced-motion: no-preference) {
+  .stagger-item:nth-child(2) { animation-delay: 100ms; }
+  .stagger-item:nth-child(3) { animation-delay: 200ms; }
+}
 
 @keyframes fade-in {
   from { opacity: 0; }
@@ -77,8 +86,7 @@ A popover, dialog or element toggled from `display: none` has no previous style 
 ```css
 [popover] {
   opacity: 0;
-  translate: 0 12px;
-  transition-property: opacity, translate, display, overlay;
+  transition-property: opacity, display, overlay;
   transition-duration: 150ms;
   transition-timing-function: ease-out;
   transition-behavior: allow-discrete;
@@ -86,14 +94,29 @@ A popover, dialog or element toggled from `display: none` has no previous style 
 
 [popover]:popover-open {
   opacity: 1;
-  translate: 0 0;
   transition-duration: 300ms;
 }
 
 @starting-style {
   [popover]:popover-open {
     opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [popover] {
     translate: 0 12px;
+    transition-property: opacity, translate, display, overlay;
+  }
+
+  [popover]:popover-open {
+    translate: 0 0;
+  }
+
+  @starting-style {
+    [popover]:popover-open {
+      translate: 0 12px;
+    }
   }
 }
 ```
@@ -105,16 +128,21 @@ A popover, dialog or element toggled from `display: none` has no previous style 
 ### Subtle exit
 
 ```tsx
-<motion.div
-  exit={{
-    opacity: 0,
-    y: -12,
-    filter: "blur(4px)",
-    transition: { duration: 0.15, ease: "easeOut" },
-  }}
->
-  {content}
-</motion.div>
+function SubtleExit({ children }) {
+  const shouldReduceMotion = useReducedMotion();
+  return (
+    <motion.div
+      exit={{
+        opacity: 0,
+        y: shouldReduceMotion ? 0 : -12,
+        filter: shouldReduceMotion ? "blur(0px)" : "blur(4px)",
+        transition: { duration: 0.15, ease: "easeOut" },
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 ```
 
 ### Full exit
@@ -122,15 +150,20 @@ A popover, dialog or element toggled from `display: none` has no previous style 
 Slide fully out only where the destination carries meaning, such as a card returning to a list or a drawer closing:
 
 ```tsx
-<motion.div
-  exit={{
-    opacity: 0,
-    x: "-100%",
-    transition: { duration: 0.2, ease: "easeOut" },
-  }}
->
-  {content}
-</motion.div>
+function FullExit({ children }) {
+  const shouldReduceMotion = useReducedMotion();
+  return (
+    <motion.div
+      exit={{
+        opacity: 0,
+        x: shouldReduceMotion ? 0 : "-100%",
+        transition: { duration: 0.2, ease: "easeOut" },
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 ```
 
 ### Good and bad
@@ -139,8 +172,14 @@ Slide fully out only where the destination carries meaning, such as a card retur
 /* Good: subtle exit */
 .item-exit {
   opacity: 0;
-  transform: translateY(-12px);
-  transition: opacity 150ms ease-out, transform 150ms ease-out;
+  transition: opacity 150ms ease-out;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .item-exit {
+    transform: translateY(-12px);
+    transition-property: opacity, transform;
+  }
 }
 
 /* Bad: dramatic exit that steals focus */

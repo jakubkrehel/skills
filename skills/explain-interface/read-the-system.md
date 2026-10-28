@@ -64,22 +64,24 @@ Every recipe is a function that returns its data, so the result comes back whole
 
 ## Tokens
 
-The walk recurses into `@layer`, `@media` and `@supports`, since Tailwind v4 writes its tokens as `:root, :host` inside `@layer theme`.
+Collect property names from nested `@layer`, `@media` and `@supports` rules, then read their active values from computed root styles. This includes theme selectors and ignores unmatched media declarations.
 
 ```js
 () => {
-  const tokens = {}; const unreadable = [];
-  const root = /(^|,)\s*(:root|html|:host)\s*(,|$)/;
+  const names = new Set(); const unreadable = [];
   const walk = list => { for (const r of list ?? []) {
-    if (r.selectorText && root.test(r.selectorText)) {
-      for (const prop of r.style) if (prop.startsWith('--')) tokens[prop] = r.style.getPropertyValue(prop).trim();
-    }
+    if (r.style) for (const prop of r.style) if (prop.startsWith('--')) names.add(prop);
     if (r.cssRules) walk(r.cssRules);
   }};
   for (const sheet of document.styleSheets) {
     let rules; try { rules = sheet.cssRules } catch { unreadable.push(sheet.href); continue }
     walk(rules);
   }
+  const style = getComputedStyle(document.documentElement);
+  const tokens = Object.fromEntries([...names].flatMap(prop => {
+    const value = style.getPropertyValue(prop).trim();
+    return value ? [[prop, value]] : [];
+  }));
   return { tokens, unreadable, count: Object.keys(tokens).length };
 }
 ```

@@ -35,7 +35,7 @@ Reduced motion targets vestibular triggers, not feedback.
 
 ## Autoplay and timed UI
 
-- **Visible controls on anything that moves on its own** (2.2.2). Anything moving, blinking or updating on its own for more than 5 seconds needs a visible pause or stop control, muted looping hero videos included.
+- **Controls for moving and updating content** (2.2.2). Automatically moving, blinking or scrolling content that lasts over 5 seconds alongside other content needs a pause, stop or hide control unless essential. Auto-updating information needs a pause, stop, hide or frequency control regardless of duration.
 - **Explicit dismissal over timers.** Auto-dismissal suits low-stakes confirmations and nothing else. A toast carrying an action, an error or information the user may need stays until dismissed.
 - **Pause on attention.** Where a toast must time out, give it at least 5 seconds, and pause the timer while it is hovered or focused.
 - **Never put critical information only in a timed element.** A vanished toast with the only link to an undo action is data loss on a schedule.

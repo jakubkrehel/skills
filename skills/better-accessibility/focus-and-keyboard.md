@@ -100,7 +100,7 @@ dialogRef.current.close(); // on close
 triggerRef.current?.focus(); // return focus to the element that opened it
 ```
 
-A custom overlay that can't use `<dialog>` needs `role="dialog"`, `aria-modal="true"` and an accessible name via `aria-labelledby`. Put `inert` on everything behind it, which removes background content from the tab order and from assistive tech in one move:
+A custom overlay that can't use `<dialog>` needs `role="dialog"`, `aria-modal="true"` and an accessible name via `aria-labelledby`. Render it outside `#app-content`, such as in a sibling portal, before making that background inert. Making an ancestor of the dialog inert hides the dialog too. Put `inert` on everything behind it, which removes background content from the tab order and from assistive tech in one move:
 
 ```tsx
 // On open

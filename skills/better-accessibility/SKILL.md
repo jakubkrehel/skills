@@ -85,7 +85,7 @@ Wrap motion in `@media (prefers-reduced-motion: no-preference)` so it is opt-in.
 
 ## Nothing the user needs runs on a timer
 
-Anything moving, blinking or updating on its own for more than 5 seconds needs a visible pause control (2.2.2). Toasts carrying an action or an error stay until dismissed. The rules are in [motion-and-zoom.md](motion-and-zoom.md).
+Automatically moving, blinking or scrolling content that lasts over 5 seconds alongside other content needs a pause, stop or hide control unless essential. Automatically updating information needs a pause, stop, hide or frequency control regardless of duration (2.2.2). Toasts carrying an action or an error stay until dismissed. The rules are in [motion-and-zoom.md](motion-and-zoom.md).
 
 ## Announce dynamic content
 

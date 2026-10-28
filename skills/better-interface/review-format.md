@@ -22,7 +22,7 @@ One table, ordered by severity, then by reach:
 
 - **Severity** comes from **Rank by user impact**.
 - **Domain** is the owning skill without the `better-` prefix.
-- **Location** is `path/to/file:line`, or the exact screen and component when the artifact has no source files.
+- **Location** is `path/to/file:line` when source exists, or the exact screen and component for a source-free artifact.
 - **Before** and **After** show the current implementation and an actionable replacement, each in its own cell.
 - **Why** names the violated principle and its user impact.
 
