@@ -64,15 +64,21 @@ Every recipe is a function that returns its data, so the result comes back whole
 
 ## Tokens
 
-The walk recurses into `@layer`, `@media` and `@supports`, since Tailwind v4 writes its tokens as `:root, :host` inside `@layer theme`.
+The walk recurses into `@layer`, `@media` and `@supports`, since Tailwind v4 writes its tokens as `:root, :host` inside `@layer theme`. It keeps a block only when the block applies, and a rule only when its selector matches the root element. That reaches a theme layer under `.dark` or `[data-theme="dark"]`.
 
 ```js
 () => {
   const tokens = {}; const unreadable = [];
-  const root = /(^|,)\s*(:root|html|:host)\s*(,|$)/;
+  const onRoot = sel => { try { return document.documentElement.matches(sel) } catch { return false } };
+  const applies = r => {
+    if (r.media) return matchMedia(r.media.mediaText).matches;
+    if (r.conditionText) return CSS.supports(r.conditionText);
+    return true;
+  };
   const walk = list => { for (const r of list ?? []) {
-    if (r.selectorText && root.test(r.selectorText)) {
-      for (const prop of r.style) if (prop.startsWith('--')) tokens[prop] = r.style.getPropertyValue(prop).trim();
+    if (!applies(r)) continue;
+    if (r.selectorText && onRoot(r.selectorText)) {
+      for (const prop of r.style) if (prop.startsWith('--')) tokens[prop] = { declared: r.style.getPropertyValue(prop).trim() };
     }
     if (r.cssRules) walk(r.cssRules);
   }};
@@ -80,11 +86,13 @@ The walk recurses into `@layer`, `@media` and `@supports`, since Tailwind v4 wri
     let rules; try { rules = sheet.cssRules } catch { unreadable.push(sheet.href); continue }
     walk(rules);
   }
+  const computed = getComputedStyle(document.documentElement);
+  for (const name in tokens) tokens[name].computed = computed.getPropertyValue(name).trim();
   return { tokens, unreadable, count: Object.keys(tokens).length };
 }
 ```
 
-Group the result by prefix, since the prefixes are the system's own layer names. A two-tier structure, `--blue-500` feeding `--color-text-primary`, is what `better-colors` calls primitives and semantic tokens.
+Group the result by prefix, since the prefixes are the system's own layer names. `declared` keeps the authored value, often a `var()` chain, and `computed` is what that resolves to on the page right now. A two-tier structure, `--blue-500` feeding `--color-text-primary`, is what `better-colors` calls primitives and semantic tokens.
 
 ## The type scale
 
@@ -197,5 +205,5 @@ Compare against the framework defaults. Tailwind v3 ships `640px`, `768px`, `102
 Everything above reads one state at one width. Before writing the explanation, at minimum:
 
 - Resize to 375px and re-run the spacing and breakpoint recipes. The values that change are what is fluid.
-- Toggle the theme and re-run the token recipe. The tokens that change are the themed layer, and the ones that do not are the primitives.
+- Toggle the theme and re-run the token recipe. Tokens whose `computed` value changes are the themed layer, and the ones that do not are the primitives.
 - Tab to the first interactive control and read its `:focus-visible` styles, which a page at rest never shows.

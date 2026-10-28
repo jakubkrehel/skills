@@ -77,8 +77,7 @@ A popover, dialog or element toggled from `display: none` has no previous style 
 ```css
 [popover] {
   opacity: 0;
-  translate: 0 12px;
-  transition-property: opacity, translate, display, overlay;
+  transition-property: opacity, display, overlay;
   transition-duration: 150ms;
   transition-timing-function: ease-out;
   transition-behavior: allow-discrete;
@@ -86,14 +85,29 @@ A popover, dialog or element toggled from `display: none` has no previous style 
 
 [popover]:popover-open {
   opacity: 1;
-  translate: 0 0;
   transition-duration: 300ms;
 }
 
 @starting-style {
   [popover]:popover-open {
     opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [popover] {
     translate: 0 12px;
+    transition-property: opacity, translate, display, overlay;
+  }
+
+  [popover]:popover-open {
+    translate: 0 0;
+  }
+
+  @starting-style {
+    [popover]:popover-open {
+      translate: 0 12px;
+    }
   }
 }
 ```

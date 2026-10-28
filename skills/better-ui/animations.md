@@ -29,25 +29,29 @@ Recipes for interruptible transitions, press feedback, first-render behavior, th
 ## Scale on press
 
 ```css
-.button {
-  transition-property: scale;
-  transition-duration: 150ms;
-  transition-timing-function: ease-out;
-}
+@media (prefers-reduced-motion: no-preference) {
+  .button {
+    transition-property: scale;
+    transition-duration: 150ms;
+    transition-timing-function: ease-out;
+  }
 
-.button:not(:disabled):active {
-  scale: 0.96;
+  .button:not(:disabled):active {
+    scale: 0.96;
+  }
 }
 ```
 
 ```tsx
 // Tailwind
-<button className="transition-transform duration-150 ease-out enabled:active:scale-[0.96]">
+<button className="transition-transform duration-150 ease-out motion-safe:enabled:active:scale-[0.96]">
   Click me
 </button>
 
 // Motion
-<motion.button whileTap={disabled ? undefined : { scale: 0.96 }} disabled={disabled}>
+const reduce = useReducedMotion();
+
+<motion.button whileTap={disabled || reduce ? undefined : { scale: 0.96 }} disabled={disabled}>
   Click me
 </motion.button>
 ```
@@ -57,7 +61,7 @@ Recipes for interruptible transitions, press feedback, first-render behavior, th
 Where the button has no variant API to carry the opt-out, apply the scale class conditionally on a `static` prop:
 
 ```tsx
-const tapScale = "enabled:active:scale-[0.96]";
+const tapScale = "motion-safe:enabled:active:scale-[0.96]";
 
 function Button({ static: isStatic, className, children, ...props }) {
   return (
