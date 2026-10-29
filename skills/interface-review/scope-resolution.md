@@ -30,6 +30,32 @@ Read files at the head ref with `git show refs/remotes/pr/<n>:path/to/file`. Nev
 
 **Intent.** The `title` and `body` from `gh pr view` are the stated intent for **Hold the change to its stated intent**. Add the commit subjects when the body is empty.
 
+## Stale pull requests
+
+Read the state before fetching anything:
+
+```bash
+gh pr view <n> --json state,mergedAt,closedAt,files
+```
+
+`OPEN` proceeds to the review. `MERGED` or `CLOSED` means the diff is history. Its findings may already be fixed on the base branch, or by a later pull request over the same files. `gh pr list --search` cannot filter by path, so intersect the file lists:
+
+```bash
+want=$(gh pr view <n> --json files --jq '[.files[].path]')
+gh pr list --state open --limit 100 --json number,title,files |
+  jq --argjson want "$want" '[.[] | {number, title, shared: ([.files[].path] - ([.files[].path] - $want))} | select(.shared | length > 0)] | sort_by(-(.shared | length))'
+```
+
+Hits come back ranked by shared file count. A hit that shares only a manifest or a changelog is rarely a successor. Raise `--limit` when the repository has more open pull requests than that.
+
+State the state, the merge or close date and the hits, then offer these routes and wait:
+
+- **The open pull request** that shares the most files, first when the search found one, named by number and title. Its review may already be pending.
+- **The current state of those files** on the default branch, which is what users see now. This is a repository-scope review of a file set, handed to `better-interface` without this skill's statuses or pre-existing section.
+- **The pull request as entered**, as a historical audit. Say in the report that its findings may already be fixed downstream.
+
+When `gh pr view` fails, the state is unknown. Say so in the scope block rather than assume `OPEN`.
+
 ## Awkward repository states
 
 Three worth handling. Everything else fails loudly at `merge-base`: unrelated histories, a repo with no commits, a moved submodule pointer. Say the base is unresolvable and stop. Never review a range you cannot name.

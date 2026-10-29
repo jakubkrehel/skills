@@ -22,6 +22,8 @@ Read the whole diff before forming an opinion of it. A skimmed diff produces fin
 
 The whole invocation is the target, so `/interface-review pr 482` reviews pull request 482. [Scope resolution](scope-resolution.md) holds the accepted targets and how each resolves.
 
+Read a pull request's state before its diff. A `MERGED` or `CLOSED` pull request is history, and an open one may already fix what the review would find. State it, search the open pull requests that touch the same files, then offer the routes in [Stale pull requests](scope-resolution.md#stale-pull-requests) and wait.
+
 With no target supplied, resolve in this order and stop at the first match:
 
 1. `HEAD` is ahead of `git merge-base origin/<default-branch> HEAD`. Review that range **plus** any uncommitted changes, stating the commit count and the uncommitted file count separately.
@@ -115,6 +117,7 @@ Rendered verification is opt-in here, in place of `better-interface`'s **Verify 
 | A line outside every hunk statused `Introduced` with no causing change named | Blame it against the reviewed range |
 | `gh pr checkout` or `git switch` in the command log | Fetch the ref and read files with `git show` |
 | A cited line that does not match `git show <head-ref>:path` | Cite against the head ref named in the scope block |
+| A full review of a pull request that `gh pr view` reports as `MERGED` or `CLOSED` | State the state, search open pull requests over the same files and ask before reviewing |
 
 ## Review output format
 
@@ -125,6 +128,7 @@ Open with the scope block:
 | Target | `branch`, `working`, `staged`, `pr 482` or the range as entered |
 | Base ref | `origin/main` at `a1b2c3d` |
 | Head ref | `refs/remotes/pr/482` at `e4f5g6h` |
+| PR state | `OPEN`, or `MERGED` on 2026-09-04 with open pull request `#491` over the same files |
 | Commits | 7 committed, 2 files uncommitted |
 | Files in scope | 12 after exclusions |
 | Excluded | `pnpm-lock.yaml`, `src/__snapshots__/`, lockfile and snapshots |
