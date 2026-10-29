@@ -74,7 +74,7 @@ For browser matrices predating `oklch()` support, the same layering works with `
 
 @supports (color: oklch(0 0 0)) {
   .accent {
-    background: oklch(0.62 0.19 259);
+    background: oklch(0.623 0.188 259.815);
   }
 }
 ```
