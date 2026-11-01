@@ -102,14 +102,18 @@ A popover, dialog or element toggled from `display: none` has no previous style 
 
 ## Exit animations
 
+Under reduced motion, keep the opacity fade and drop movement and blur.
+
 ### Subtle exit
 
 ```tsx
+const shouldReduceMotion = useReducedMotion();
+
 <motion.div
   exit={{
     opacity: 0,
-    y: -12,
-    filter: "blur(4px)",
+    y: shouldReduceMotion ? 0 : -12,
+    filter: shouldReduceMotion ? "none" : "blur(4px)",
     transition: { duration: 0.15, ease: "easeOut" },
   }}
 >
@@ -122,10 +126,12 @@ A popover, dialog or element toggled from `display: none` has no previous style 
 Slide fully out only where the destination carries meaning, such as a card returning to a list or a drawer closing:
 
 ```tsx
+const shouldReduceMotion = useReducedMotion();
+
 <motion.div
   exit={{
     opacity: 0,
-    x: "-100%",
+    x: shouldReduceMotion ? 0 : "-100%",
     transition: { duration: 0.2, ease: "easeOut" },
   }}
 >
@@ -139,8 +145,14 @@ Slide fully out only where the destination carries meaning, such as a card retur
 /* Good: subtle exit */
 .item-exit {
   opacity: 0;
-  transform: translateY(-12px);
-  transition: opacity 150ms ease-out, transform 150ms ease-out;
+  transition: opacity 150ms ease-out;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .item-exit {
+    transform: translateY(-12px);
+    transition: opacity 150ms ease-out, transform 150ms ease-out;
+  }
 }
 
 /* Bad: dramatic exit that steals focus */

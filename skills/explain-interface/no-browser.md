@@ -11,7 +11,7 @@ wc -c page.html
 grep -oE 'href="[^"]*\.css[^"]*"' page.html | sed 's/href="//;s/"$//' | sort -u
 ```
 
-Pull each stylesheet the same way into `style.css`, resolving protocol-relative and root-relative hrefs against the page's origin first.
+Pull each stylesheet the same way into `style.css`, resolving protocol-relative, root-relative and path-relative hrefs against the page URL first.
 
 ## Utility CSS is self-describing
 
