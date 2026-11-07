@@ -1,10 +1,10 @@
 ---
-name: away
+name: afk
 description: Works through a project while you're away, finding improvements and new ideas, building the strongest few on a local branch and leaving a report for when you're back.
 disable-model-invocation: true
 ---
 
-# Away
+# AFK
 
 This skill spends the time you're gone making one project better. It gathers evidence, generates ideas widely, builds the strongest few on a local branch and leaves a report you can read in two minutes.
 
@@ -40,7 +40,7 @@ When a sibling project solved the same problem, port that solution and restyle i
 
 The person comes back to choices, not to cleanup:
 
-- Work on a new branch named `away/<date>` from the default branch. When the working tree holds uncommitted work, build in a separate `git worktree` and leave that work exactly as it was.
+- Work on a new branch named `afk/<date>` from the default branch. When the working tree holds uncommitted work, build in a separate `git worktree` and leave that work exactly as it was.
 - Commit locally, one change per commit, in the repository's own commit style. Push, open pull requests, merge, deploy, post and send messages only when this request asked for it.
 - Treat connected services as read-only. Read analytics, error trackers and deploy logs, and change no settings, data or integrations.
 - Leave the person's own writing in their voice. Draft new copy, changelog entries or posts in the report rather than editing published prose.
