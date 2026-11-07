@@ -12,11 +12,29 @@ Depth beats speed here. The person is gone for hours, so when the first batch is
 
 Reviewing an interface is `better-interface`, reviewing a diff is `interface-review`, exploring alternatives for one component is `variant` and stress testing one is `break`.
 
-## Evidence first, taste second
+## Better for the people who use it
 
-Rank every idea by its evidence of need. Real traffic landing on a 404 counts, and so does an error in production. So does a promise the product's copy doesn't keep, or a fix the person already shipped in a sibling project. An idea with no evidence can still be built, but it loses every tie and its diff stays small.
+Every idea answers one question: would someone using this product genuinely find it better? Name that person and the moment it helps them, such as a reader landing on a dead link or a visitor hunting for a post. An idea that only makes the code tidier or the agent look busy fails the test.
 
-Wild ideas belong in the report even when nothing supports building them tonight. A list with only safe fixes means the generating step was cut short.
+Rank what passes by its evidence of need. Real traffic landing on a 404 counts, and so does an error in production. So does a promise the product's copy doesn't keep, or a fix the person already shipped in a sibling project. An idea with no evidence can still be built, but it loses every tie and its diff stays small.
+
+## Sometimes out of the box
+
+Most nights the strongest ideas are fixes and polish. Some nights one idea should be unexpected. It might be a feature the product's own content makes possible, a new way to browse it or a tool that changes how the person works. Build one when it passes the test above and fits in a small diff. Otherwise it goes in the report with the reasoning that makes it worth trying.
+
+A list with only safe fixes means the generating step was cut short.
+
+## Match the repository
+
+A change should read as if the person wrote it. Before building anything, find how the repository already solves the nearest problem and copy that:
+
+- Reuse its components, hooks and utilities. A new primitive needs a reason the existing ones can't cover.
+- Use its design tokens for color, spacing, radius, type and motion. Take values from the nearest existing surface and invent none.
+- Follow its file layout, naming, import style and the rules in its agent docs, including when to write comments.
+- Write interface copy in the voice the product already uses, at its length and with its punctuation.
+- Keep its architecture. A new state library, styling approach or data layer is an idea for the report, never something to build unattended.
+
+When a sibling project solved the same problem, port that solution and restyle it with this repository's tokens.
 
 ## Stay reversible
 
@@ -41,11 +59,11 @@ Then read the person's sibling projects for something they already solved there,
 
 ## 3. Generate widely
 
-Write at least fifteen ideas before choosing any. Cover fixes, design polish, features, content, performance, accessibility and the person's own tooling, such as a skill or a script. Include at least three that change what the product does, not only how it looks. Give each idea its evidence, its rough size and what it risks. Done when every area has an idea and the list has its wild ones.
+Write at least fifteen ideas before choosing any. Cover fixes, design polish, features, content, performance, accessibility and the person's own tooling, such as a skill or a script. Include at least three that change what the product does, not only how it looks. Give each idea the person it helps, its evidence, its rough size and what it risks. Cut any idea whose person you can't name. Done when every area has an idea and at least one would surprise the person.
 
 ## 4. Build the strongest few
 
-Choose the ideas with the best evidence that each land as one small commit. Fix real user pain first, then build features, then polish. Build each in the project's own patterns and design tokens, and run the project's check command before committing. Done when each chosen idea is committed or dropped with the reason it was dropped.
+Choose the ideas with the best evidence that each land as one small commit. Fix real user pain first, then build features, then polish. Build each as **Match the repository** describes, and run the project's check command before committing. Done when each chosen idea is committed or dropped with the reason it was dropped.
 
 ## 5. See each change working
 
@@ -73,4 +91,6 @@ Drafts from **Stay reversible** go with the ideas, ready to paste.
 | A diff touches files the person had uncommitted | Move the work to a separate worktree and restore theirs |
 | A comment explains what the code does | Delete it unless the code would look wrong without it |
 | The ideas list holds only fixes | Go back to **3. Generate widely** for the wild ones |
+| A built idea helps no one you can name | Revert it and move it to the report |
+| A new color, spacing value or component appears in the diff | Replace it with the repository's nearest existing one |
 | Work stopped with time left and ideas unbuilt | Build the next evidenced idea |
