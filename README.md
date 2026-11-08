@@ -24,6 +24,7 @@ These skills cover topics that I write about on [my personal website](https://ja
 - [**teardown**](skills/teardown/SKILL.md): Creates a technical illustration of an object and lets you configure it, color it and download as an SVG, PNG or PDF.
 - [**state-machine**](skills/state-machine/SKILL.md): Renders every state of a component you choose on a throwaway page, with mock data and a switcher, so you can work on each state. User-invoked.
 - [**variant**](skills/variant/SKILL.md): Builds multiple **variants** of a component you're working on and helps you iterate and pick one. User-invoked.
+- [**afk**](skills/afk/SKILL.md): Works through a project while you're away, finding **improvements** and **new ideas**, building the strongest few on a local branch and leaving a **report** for when you're back. User-invoked.
 
 ## Install
 

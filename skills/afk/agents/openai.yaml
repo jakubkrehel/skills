@@ -1,0 +1,5 @@
+interface:
+  display_name: "AFK"
+  short_description: "Improve a project while you're away and leave a report"
+policy:
+  allow_implicit_invocation: false
