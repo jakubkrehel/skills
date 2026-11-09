@@ -12,7 +12,7 @@ Reviewing an interface is `better-interface`, reviewing a diff is `interface-rev
 
 ## Hours of wide exploration
 
-A run is meant to last hours. A run that ends after three commits and twenty minutes wasted the time the person left for it. When a batch is built and verified, take the next idea from the list. When the list runs dry, return to **2. Gather evidence** for a part of the project not yet read.
+A run is meant to last hours. A run that ends after three commits and twenty minutes wasted the time the person left for it. When a batch is built and verified, take the next idea from the list. When the list runs dry, return to **Gather evidence** for a part of the project not yet read.
 
 This is exploration, so go wide before going deep. Read every area of the product, from its busiest pages to its settings, docs and tooling. Ideas clustered around one page or one file mean the exploration stopped early. Polishing one change past good enough costs breadth, so move on.
 
@@ -96,7 +96,7 @@ Drafts from **Stay reversible** go with the ideas, ready to paste.
 | The report lists commit subjects | Say what a user sees now, and why it was built |
 | A diff touches files the person had uncommitted | Move the work to a separate worktree and restore theirs |
 | A comment explains what the code does | Delete it unless the code would look wrong without it |
-| The ideas list holds only fixes | Go back to **3. Generate widely** for the wild ones |
+| The ideas list holds only fixes | Go back to **Generate widely** for the wild ones |
 | A built idea helps no one you can name | Revert it and move it to the report |
 | A new color, spacing value or component appears in the diff | Replace it with the repository's nearest existing one |
 | Work stopped with time left and ideas unbuilt | Build the next evidenced idea |
