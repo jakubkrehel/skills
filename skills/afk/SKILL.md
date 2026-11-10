@@ -56,12 +56,6 @@ The person comes back to choices, not to cleanup:
 - Add a dependency only when a sibling project already uses it for the same job, and name it in the report.
 - Snapshot any file a test run writes to, and restore it from the snapshot afterwards.
 
-## One pull request per idea
-
-When the request asks for pull requests, open one per idea, each from its own `afk/<date>-<idea>` branch off the default branch. A risky idea then can't hold a safe one. Describe each with that idea's entry from the report, and stay with it until its checks pass on the latest commit.
-
-A review bot's finding is a claim to verify. Reproduce it before changing anything, then fix it or answer on its thread why not.
-
 ## Notes that outlive the conversation
 
 A run of hours outlives its context, and a run that stops early should still leave something. Keep the run's notes in `.afk/<date>.md` at the root of the person's checkout. They hold every idea with its evidence and status. They also hold each decision made for the person. List `.afk/` in `.git/info/exclude` so the notes never reach a commit. Update the file after every step and write the report from it.
@@ -124,7 +118,7 @@ Commits that pass alone can fail together, so run every check CI runs on the fin
 
 End with one message the person reads first, in this order:
 
-1. **Where things are.** The branch, the commit count, any pull requests, any dev server URL and anything left running.
+1. **Where things are.** The branch, the commit count, any dev server URL and anything left running.
 2. **What was built.** One entry per change, saying what a user now sees, the evidence that motivated it and the one action that shows it. Give before and after for anything measured.
 3. **What was backed out.** Changes built and then shrunk or reverted, each with the evidence that decided it.
 4. **What was verified.** Seen working, kept apart from checked only by types or not checked at all.
