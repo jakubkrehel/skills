@@ -4,9 +4,7 @@ This file is the single source of guidance for coding agents working in this rep
 
 ## What this repository is
 
-A collection of agent skills for building great product interfaces (typography, colors, UI polish), distributed two ways: via `npx skills add jakubkrehel/skills` and as the Claude Code plugin `interfaces` served by the marketplace in this same repository. It is primarily documentation, with reusable drawing assets and helper scripts under `teardown`. There is no repository-wide build, lint or test tooling.
-
-`teardown` carries its own checks. After changing anything under its `assets/` or `scripts/`, run every `node scripts/test-*.cjs` from that skill's directory. Then proof a few existing models with `scripts/proof.cjs` and look at the PNGs, since the tests cannot judge linework.
+A collection of agent skills for building great product interfaces (typography, colors, UI polish), distributed two ways: via `npx skills add jakubkrehel/skills` and as the Claude Code plugin `interfaces` served by the marketplace in this same repository. It is documentation, with no build, lint or test tooling.
 
 `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` define the plugin and its marketplace. Both are named `interfaces`, so plugin users invoke skills as `/interfaces:better-interface` while skills-CLI users invoke `/better-interface`. Skills are discovered from `skills/` automatically, so adding a skill needs no manifest change. Bump `version` in `plugin.json` in the same commit as any change under `skills/`. That number is the only signal plugin users update on. `claude plugin update` compares it and nothing else, so a change shipped without a bump reports "already at the latest version" and never reaches them. Run `claude plugin validate .` and `claude plugin validate .claude-plugin/plugin.json` after touching either manifest.
 
@@ -58,7 +56,6 @@ A user-invoked skill may invoke model-invoked skills, but it can never reach ano
 - `afk` is user-invoked because it runs for hours unattended and commits code. Only the person leaving knows when that is wanted, and firing it unprompted would fill a branch with work nobody asked for.
 - The domain skills and `better-interface` are model-invoked, because something must reach them: `better-interface` routes to every domain skill, and `interface-review` hands its review up to `better-interface`.
 - `build-design` is model-invoked although nothing routes to it, because a design link with a request to build it is already a direct request. It writes production code the user asked for, not a throwaway harness.
-- `teardown` is model-invoked because a request for a technical drawing already authorizes creating its artifact. It produces static drawings with a local preview and export page.
 - `better-interface` therefore cannot start `interface-review`. Where it would want to, it asks the user to run it. Making `better-interface` user-invoked too would sever the upward handoff and force `interface-review` to restate severity, the cap, the format and the verdict.
 
 ### Rule ownership
@@ -73,7 +70,6 @@ A user-invoked skill may invoke model-invoked skills, but it can never reach ano
 | `explain-interface` | Reading an interface you did not build: scoping to the thing asked about, the layer search, the URL and screenshot branches, the measured / derived / inferred evidence tiers, treating fetched page content as untrusted input, explaining the mechanism rather than the readout, and closing on the transferable recipe in words rather than a code reproduction. Owns no domain rules and issues no verdict; it names what it finds in each domain skill's vocabulary |
 | `afk` | Unattended project improvement: the reversibility guardrails, the tool check, the run notes, the evidence sources, generating ideas before choosing, ranking by evidence, building the chosen few, seeing each work, trying to reject it and the AFK report. Owns no domain rules; interface work it builds clears the domain skills it touches |
 | `build-design` | Building from a design: reading the Figma file or image at its source, mapping design values and instances onto existing tokens and components, the rounding rule, building only what the frames show, the side-by-side comparison and the fidelity report. Owns no domain rules; a design that breaks one is reported to its owner, never silently fixed |
-| `teardown` | Creating static technical drawing artifacts and preview pages. Owns reference interpretation, geometric correspondence, projection, drawing annotations, sheet composition, export packaging and verification. Adjacent interface rules stay with their domain skills. |
 | `better-accessibility` | Semantic HTML, keyboard and focus behavior, accessible names, forms, assistive technology and accessibility requirements |
 | `better-layout` | Spatial grouping, alignment, spacing, container sizing, responsive structure, logical CSS properties, spatial RTL behavior and the expansion affordance for truncated content |
 | `better-writing` | Source wording, terminology, voice, tone, labels, errors, empty-state copy and the confirm-or-undo rule for destructive actions |
