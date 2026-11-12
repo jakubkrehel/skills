@@ -1,2 +1,3 @@
 skills/**/*.md linguist-detectable
 README.md linguist-documentation
+skills/teardown/** linguist-vendored
