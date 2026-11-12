@@ -62,7 +62,7 @@ Run the safe, relevant checks the project offers. Inspect the rendered interface
 
 ## Require evidence
 
-Every finding cites `path/to/file:line` and shows the current implementation. When runtime behavior determines the result, source alone cannot support a visual finding and a screenshot alone cannot support a code finding.
+Every finding cites its location and shows the current implementation. When runtime behavior determines the result, source alone cannot support a visual finding and a screenshot alone cannot support a code finding.
 
 ## Rank by user impact
 

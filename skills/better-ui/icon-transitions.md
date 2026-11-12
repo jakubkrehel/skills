@@ -13,16 +13,16 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 function IconButton({ isActive, ActiveIcon, InactiveIcon }) {
   const reduce = useReducedMotion();
-  const rest = reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" };
+  const hidden = reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" };
   const shown = reduce ? { opacity: 1 } : { opacity: 1, scale: 1, filter: "blur(0px)" };
   return (
     <button>
       <AnimatePresence initial={false} mode="popLayout">
         <motion.span
           key={isActive ? "active" : "inactive"}
-          initial={rest}
+          initial={hidden}
           animate={shown}
-          exit={rest}
+          exit={hidden}
           transition={{ type: "spring", duration: 0.3, bounce: 0 }}
         >
           {isActive ? <ActiveIcon /> : <InactiveIcon />}

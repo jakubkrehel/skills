@@ -64,7 +64,7 @@ Every recipe is a function that returns its data, so the result comes back whole
 
 ## Tokens
 
-The walk recurses into `@layer`, `@media` and `@supports`, since Tailwind v4 writes its tokens as `:root, :host` inside `@layer theme`. It keeps a block only when the block applies, and a rule only when its selector matches the root element. That reaches a theme layer under `.dark` or `[data-theme="dark"]`.
+The walk recurses into `@layer`, `@media` and `@supports`, since Tailwind v4 writes its tokens as `:root, :host` inside `@layer theme`. It keeps a block only when the block applies and a rule only when its selector matches the root element. That reaches a theme layer under `.dark` or `[data-theme="dark"]`.
 
 ```js
 () => {

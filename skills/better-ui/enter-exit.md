@@ -12,17 +12,18 @@ Recipes for staged entrances and the exits that follow them. For interactive sta
 ### Motion
 
 ```tsx
-const item = {
-  hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.3, ease: "easeOut" },
-  },
-};
-
 function PageHeader() {
+  const reduce = useReducedMotion();
+  const item = {
+    hidden: reduce ? { opacity: 0 } : { opacity: 0, y: 12, filter: "blur(4px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.3, ease: "easeOut" },
+    },
+  };
+
   return (
     <motion.div
       initial="hidden"
@@ -116,17 +117,15 @@ A popover, dialog or element toggled from `display: none` has no previous style 
 
 ## Exit animations
 
+Each exit keeps its opacity fade under reduced motion and drops the movement and blur.
+
 ### Subtle exit
 
 ```tsx
-<motion.div
-  exit={{
-    opacity: 0,
-    y: -12,
-    filter: "blur(4px)",
-    transition: { duration: 0.15, ease: "easeOut" },
-  }}
->
+const reduce = useReducedMotion();
+const out = reduce ? { opacity: 0 } : { opacity: 0, y: -12, filter: "blur(4px)" };
+
+<motion.div exit={{ ...out, transition: { duration: 0.15, ease: "easeOut" } }}>
   {content}
 </motion.div>
 ```
@@ -136,10 +135,12 @@ A popover, dialog or element toggled from `display: none` has no previous style 
 Slide fully out only where the destination carries meaning, such as a card returning to a list or a drawer closing:
 
 ```tsx
+const reduce = useReducedMotion();
+
 <motion.div
   exit={{
     opacity: 0,
-    x: "-100%",
+    x: reduce ? 0 : "-100%",
     transition: { duration: 0.2, ease: "easeOut" },
   }}
 >
@@ -150,11 +151,17 @@ Slide fully out only where the destination carries meaning, such as a card retur
 ### Good and bad
 
 ```css
-/* Good: subtle exit */
+/* Good: subtle exit, fading only under reduced motion */
 .item-exit {
   opacity: 0;
-  transform: translateY(-12px);
-  transition: opacity 150ms ease-out, transform 150ms ease-out;
+  transition: opacity 150ms ease-out;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .item-exit {
+    transform: translateY(-12px);
+    transition: opacity 150ms ease-out, transform 150ms ease-out;
+  }
 }
 
 /* Bad: dramatic exit that steals focus */
