@@ -34,7 +34,6 @@ npx skills add jakubkrehel/skills
 - [**explain-interface**](skills/explain-interface/SKILL.md): Explains how a website, a visual effect or an animation was built, from a **live URL** or a **screenshot**. User-invoked.
 - [**break**](skills/break/SKILL.md): Renders a component you choose under **every scenario** that can reach it on a temporary page and stress tests it. User-invoked.
 - [**build-design**](skills/build-design/SKILL.md): Builds UI from a Figma file or a design image so it matches the design, using the project's existing tokens and components.
-- [**teardown**](skills/teardown/SKILL.md): Creates a technical illustration of an object and lets you configure it, color it and download as an SVG, PNG or PDF.
 - [**state-machine**](skills/state-machine/SKILL.md): Renders every state of a component you choose on a throwaway page, with mock data and a switch, so you can work on each state. User-invoked.
 - [**variant**](skills/variant/SKILL.md): Builds multiple **variants** of a component you're working on and helps you iterate and pick one. User-invoked.
 - [**afk**](skills/afk/SKILL.md): Works through a project while you're away, finds **improvements**, explores **new ideas** and feedbacks them. They're ready for you to review when you're back report. User-invoked.
