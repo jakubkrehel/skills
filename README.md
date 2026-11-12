@@ -8,6 +8,19 @@ A collection of agent skills that cover UI, typography, colors, accessibility, l
 
 These skills cover topics that I write about on [my personal website](https://jakub.kr/) and my design engineering magazine, [Interfaces](https://interfaces.dev/).
 
+## Install
+
+```bash
+npx skills add jakubkrehel/skills
+```
+
+## Claude Code plugin
+
+```text
+/plugin marketplace add jakubkrehel/skills
+/plugin install interfaces@interfaces
+```
+
 ## Skills that help build great interfaces
 
 - [**better-interface**](skills/better-interface/SKILL.md): Reviews a screen, flow or whole interface across **accessibility**, **layout**, **writing**, **typography**, **color** and **UI polish**, and returns one ranked report.
@@ -25,16 +38,3 @@ These skills cover topics that I write about on [my personal website](https://ja
 - [**state-machine**](skills/state-machine/SKILL.md): Renders every state of a component you choose on a throwaway page, with mock data and a switch, so you can work on each state. User-invoked.
 - [**variant**](skills/variant/SKILL.md): Builds multiple **variants** of a component you're working on and helps you iterate and pick one. User-invoked.
 - [**afk**](skills/afk/SKILL.md): Works through a project while you're away, finds **improvements**, explores **new ideas** and feedbacks them. They're ready for you to review when you're back report. User-invoked.
-
-## Install
-
-```bash
-npx skills add jakubkrehel/skills
-```
-
-## Claude Code plugin
-
-```text
-/plugin marketplace add jakubkrehel/skills
-/plugin install interfaces@interfaces
-```
