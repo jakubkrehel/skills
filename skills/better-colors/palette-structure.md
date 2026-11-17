@@ -14,8 +14,6 @@ Most products need three kinds of ramp and nothing else:
 
 ## Every step has a job
 
-Each step maps to a role. Generate the steps the roles below call for and skip the rest.
-
 | Role | Tailwind | Radix |
 | --- | --- | --- |
 | Page background | `50` | `1` |

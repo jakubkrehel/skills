@@ -1,18 +1,12 @@
 # Choosing fonts
 
-Font categories, fallback stacks for a type change, file formats and why fonts look the way they do.
+`Display` and `Text` cuts, fallback stacks for a type change and the file format to serve.
 
-## Choosing a typeface
-
-| Category | Traits | Use for |
-| --- | --- | --- |
-| Serif | Small strokes at the ends of letters guide the eye along a line | Long passages, editorial reading |
-| Sans-serif | Clean, even shapes that stay crisp at small sizes | Default for most interfaces (Helvetica, Inter, Geist) |
-| Monospace | Every glyph the same width | Code and fixed-width identifiers; numeric columns use `tabular-nums` instead |
-| Display | Drawn for large headlines | Marketing headlines, hero text |
-| Script | Mimics handwriting | Rare, decorative moments |
+## Display and Text cuts
 
 "Display" in a font's name does not make it a display font. SF Pro and Heldane ship a `Display` variant for large sizes and a `Text` variant for small ones. Use the variant matching the size you are setting.
+
+For numeric columns, use `tabular-nums` on the interface face before reaching for a monospace one.
 
 ## Fallback stacks for a type change
 
@@ -32,22 +26,4 @@ html {
 
 ## Formats
 
-| Format | Notes |
-| --- | --- |
-| `.woff2` | Brotli compression, broadly supported. Use this on the web. |
-| `.woff` | Older compression. Fallback only for very old browsers. |
-| `.ttf` / `.otf` | Desktop formats with no built-in compression, so larger files. Only when there is no other option. |
-
-How the files load is the project's concern.
-
-## Anatomy of a typeface
-
-| Term | Meaning |
-| --- | --- |
-| x-height | Height of a lowercase `x` |
-| Cap height | Height of uppercase letters |
-| Baseline | The invisible line letters sit on |
-| Ascender | Part of a letter rising above the x-height |
-| Descender | Part dropping below the baseline |
-
-These measurements are why two fonts at the same `font-size` look like different sizes. A large x-height looks bigger.
+Serve `.woff2`. Add `.woff` only for a browser matrix old enough to need it, and ship `.ttf` or `.otf` only when nothing else exists. How the files load is the project's concern.

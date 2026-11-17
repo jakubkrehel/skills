@@ -1,15 +1,6 @@
 # Spacing and sizing
 
-Units, a starting type scale, the heading mapping, line-height for wrapping text and text trimming.
-
-## Units
-
-| Unit | Behavior |
-| --- | --- |
-| `px` | Fixed |
-| `em` | Scales with the current font size |
-| `rem` | Scales with the root font size |
-| `%` on `font-size` | Relative to the parent's font size, behaves like `em` |
+A starting type scale, the heading mapping, line-height for wrapping text and text trimming.
 
 ## Type scale
 

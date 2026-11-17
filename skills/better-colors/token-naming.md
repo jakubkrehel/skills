@@ -4,10 +4,6 @@ Naming is what makes a palette usable by anyone who did not build it. For which 
 
 ## Two tiers
 
-**Primitives** name a value. They are the ramp, named by hue and step, as in `--blue-600` or `--neutral-200`. A primitive describes what the color *is*, so it never changes meaning between themes and is never applied directly in a component.
-
-**Semantics** name a job. They point at a primitive and take the name of the role they fill, as in `--color-text-secondary` or `--color-border-subtle`. Components only ever reference this tier.
-
 ```css
 :root {
   /* Tier 1: primitives, named by hue and step. Never used directly. */
@@ -22,7 +18,7 @@ Naming is what makes a palette usable by anyone who did not build it. For which 
 }
 ```
 
-The tiering is what makes theming possible. Dark mode, a white-label theme and an increased-contrast variant all repoint the semantic tier, leaving the primitives and every component untouched. A codebase applying `--blue-600` directly in components has no theming seam. Adding one later means auditing every usage to work out which meant "the accent" and which just wanted blue.
+Dark mode, a white-label theme and an increased-contrast variant all repoint the semantic tier. A codebase applying `--blue-600` directly in components has no theming seam. Adding one later means auditing every usage to work out which meant "the accent" and which just wanted blue.
 
 Add a third, component-level tier (`--color-button-danger-bg`) only where a component genuinely and intentionally diverges from the system. One component token is a documented exception; twenty mean the semantic tier is missing roles.
 

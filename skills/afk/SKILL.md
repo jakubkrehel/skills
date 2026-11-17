@@ -133,17 +133,8 @@ Drafts from **Stay reversible** go with the ideas, ready to paste.
 | Pattern | Fix |
 | --- | --- |
 | A commit subject needs "and" | Split it into two commits |
-| A change is verified only by a type check | Exercise it in the running app or mark it unverified |
-| A shared component changed and one page was checked | Look at every surface that renders it |
-| A new test passes with the change removed | Rewrite it until it fails |
-| A regression was found and the commit stayed | Shrink it or revert it, and report the numbers |
-| The check command passed and CI runs more than that | Run what CI runs, or name what couldn't run |
 | The report lists commit subjects | Say what a user sees now, and why it was built |
 | A diff touches files the person had uncommitted | Move the work to a separate worktree and restore theirs |
 | A comment explains what the code does | Delete it unless the code would look wrong without it |
-| The ideas list holds only fixes | Go back to **Generate widely** for the wild ones |
-| A built idea helps no one you can name | Revert it and move it to the report |
 | A new color, spacing value or component appears in the diff | Replace it with the repository's nearest existing one |
 | Time is left and built changes are unproven | Prove them before building the next idea |
-| Work stopped with time left and ideas unbuilt | Build the next evidenced idea |
-| Every idea and commit sits in one area and the request named no focus | Gather evidence from the areas not yet read |
