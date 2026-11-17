@@ -6,6 +6,8 @@ Hand each reader this text with the path of its file and one sentence describing
 >
 > It is a dated log of every prompt one person typed to a coding agent on one project. Only their side is there.
 >
+> `[Image #n]` and `[Pasted text #n +k lines]` mark a screenshot or a paste whose content is not in the log. A line that starts with a file path is a dragged file, not a command.
+>
 > The aim is to learn where their time and patience go, so tooling can be designed from evidence. There is no hypothesis to confirm. Report what the log shows, including what does not recur.
 >
 > For each item give a count where you can and two to four short dated quotes. Leave out any quote that carries a key, a token, an email address or a customer's words.
@@ -18,4 +20,4 @@ Hand each reader this text with the path of its file and one sentence describing
 > 6. Commands and skills they invoke. What they type next.
 > 7. Episodes that happened once and cost a lot.
 >
-> Plain text, under 900 words. Where the evidence is thin, say so.
+> Plain text, under 1,200 words. Where the evidence is thin, say so.
