@@ -61,7 +61,7 @@ Target `<main id="main">` and visually hide the link until focused:
 </body>
 ```
 
-Give in-page anchor targets `scroll-margin-block-start`, such as `80px` under a sticky header, so the target isn't hidden when jumped to.
+Where the scroller sets no `scroll-padding-block-start`, give in-page anchor targets `scroll-margin-block-start`, such as `80px` under a sticky header. The two add up, so never set both for one header.
 
 ## tabindex rules
 
@@ -123,7 +123,7 @@ Native elements come with these behaviors; custom widgets must implement them.
 
 | Widget | Keys |
 | --- | --- |
-| Dialog | Tab/Shift+Tab cycle inside (wrap at ends); Escape closes |
+| Dialog | Tab and Shift+Tab stay inside; Escape closes |
 | Tabs | Arrow keys move between tabs (wrapping); Tab exits to the panel; Home/End jump to first/last |
 | Menu button | Enter/Space/ArrowDown opens and focuses first item; ArrowUp opens and focuses last; arrows navigate; Escape closes and refocuses the button |
 | Disclosure / accordion | Header is a `<button aria-expanded>`; Enter and Space toggle |
@@ -138,4 +138,4 @@ Universal rules:
 
 ## SPA route changes
 
-Client-side navigation doesn't reset focus or announce anything. On route change, update `document.title` to match the new context, then move focus to the new view's `<h1>` (given `tabindex="-1"`) or to `<main>`. Restore scroll position on history traversal with back and forward, and scroll to top on a new navigation.
+Client-side navigation doesn't reset focus or announce anything. On route change, update `document.title` to match the new context, then move focus to the new view's `<h1>` or to `<main>`, either given `tabindex="-1"`. Restore scroll position on history traversal with back and forward, and scroll to top on a new navigation.

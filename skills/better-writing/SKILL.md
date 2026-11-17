@@ -48,7 +48,7 @@ Skip unnecessary gender: "Subscribers can post recipes", not "each subscriber ca
 
 ## Build strings whole
 
-Never assemble a sentence from fragments around a variable (`"You have " + n + " new messages"`), because word order changes per language. Write one message with placeholders, and use the locale's plural rules rather than `n === 1 ? "" : "s"`. Many languages have more than two plural forms. Format numbers, dates and lists through `Intl`. Recipes are in [patterns.md](patterns.md#plurals-and-placeholders).
+Never assemble a sentence from fragments around a variable (`"You have " + n + " new messages"`), because word order changes per language. Write one message with placeholders, and use the locale's plural rules rather than `n === 1 ? "" : "s"`. Many languages have more than two plural forms. Format numbers, dates and lists through `Intl`. Recipes are in patterns.md under [plurals](patterns.md#plurals-and-placeholders) and [locale formatting](patterns.md#locale-formatting).
 
 ## Verb-first buttons
 
@@ -125,7 +125,7 @@ A placeholder shows a realistic example in the format the field accepts, `name@e
 | --- | --- |
 | `Click here`, a link reading `here` or two identical `Learn more` links | Name the destination |
 | `Oops`, `Something went wrong` or `!` in an error string | Say what failed and the next step |
-| `" + n + "`, a template literal holding a sentence fragment, or `=== 1 ? "" : "s"` | One ICU message with a plural argument |
+| `" + n + "`, a template literal holding a sentence fragment, or `=== 1 ? "" : "s"` | One message with a plural argument |
 | `>OK<`, `>Yes<` or `>No<` on a dialog button | Verb plus object |
 | `Are you sure` | Name the action and the object |
 | `successfully` | Cut it: "Changes saved" |
@@ -137,15 +137,6 @@ A placeholder shows a realistic example in the format the field accepts, `name@e
 
 ## Reporting
 
-**Severity.** `HIGH` misleads the user or hides how to recover from an error. An error that names no way to recover is always `HIGH`, as is a destructive action with neither confirmation nor undo. `MEDIUM` breaks voice, terminology or capitalization consistency. `LOW` is isolated wording polish.
-
 **Verification.** Check every label against the action it invokes, every error for a stated fix and every term against the inventory. Read locale files as well as components. Report strings supplied by the server or a CMS that you could not see as `Not verified`.
 
-**Format.** Group findings under the principle each violates, ordered by severity, one row per root cause listing every location it appears in:
-
-| Severity | Location | Before | After | Why |
-| --- | --- | --- | --- | --- |
-
-`Location` is `path/to/file:line`. `Why` names the principle and the user impact.
-
-End with `Block` when any `HIGH` remains, `Approve` otherwise, leaving the rest in the table as work to do. Never `Approve` coverage you did not inspect. With nothing to report, state "No actionable writing findings" and report verification.
+A standalone review takes its severity ladder and format from [reporting.md](reporting.md).

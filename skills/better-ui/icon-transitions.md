@@ -16,7 +16,7 @@ function IconButton({ isActive, icon: Icon }) {
   const hidden = reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" };
   const shown = reduce ? { opacity: 1 } : { opacity: 1, scale: 1, filter: "blur(0px)" };
   return (
-    <button>
+    <button className="relative">
       <AnimatePresence initial={false} mode="popLayout">
         <motion.span
           key={isActive ? "active" : "inactive"}

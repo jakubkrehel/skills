@@ -204,6 +204,6 @@ Compare against the framework defaults. Tailwind v3 ships `640px`, `768px`, `102
 
 Everything above reads one state at one width. Before writing the explanation, at minimum:
 
-- Resize to 375px and re-run the spacing and breakpoint recipes. The values that change are what is fluid.
+- Resize to 375px and re-run the spacing and type scale recipes. The values that change are what is fluid.
 - Toggle the theme and re-run the token recipe. Tokens whose `computed` value changes are the themed layer, and the ones that do not are the primitives.
 - Tab to the first interactive control and read its `:focus-visible` styles, which a page at rest never shows.

@@ -10,7 +10,7 @@ Recipes for control clearance, edge insets, disclosure cues, edge behavior, brea
 | Visible glyphs of borderless controls, such as text and icon buttons | `24px` |
 | Unrelated control groups | `24px` or more |
 
-Nothing marks where one borderless target ends and the next begins, so the space is the boundary. Preserve an established, usable density rather than expanding controls to match these values.
+Nothing marks where one borderless target ends and the next begins, so the space is the boundary.
 
 ```html
 <!-- Good: bordered buttons at 12px -->
@@ -57,7 +57,7 @@ The button can still span the full content width inside the margins.
 - **Disclosure controls.** A collapsed section gets a chevron or a "Show more" control naming what is hidden: "Show 12 more results", not "More".
 - **Truncated values.** Pair the clamp with an expand control, a link to a detail view or a tooltip that also opens on keyboard focus. A hover-only `title` attribute does not count, because keyboard and touch users never see it.
 
-The item width sets the peek: width = `100%` + gap − peek, since `100%` is the container's content box. Scroll padding keeps snapped items on the content edge.
+The item width sets the peek: width = `100%` + padding − gap − peek, since `100%` is the container's content box. Scroll padding keeps snapped items on the content edge.
 
 ```css
 .scroller {
@@ -69,7 +69,7 @@ The item width sets the peek: width = `100%` + gap − peek, since `100%` is the
   scroll-snap-type: x mandatory;
 }
 .scroller > * {
-  flex: 0 0 calc(100% - 12px); /* content box + 12px gap - 24px peek */
+  flex: 0 0 calc(100% - 12px); /* content box + 24px padding - 12px gap - 24px peek */
   scroll-snap-align: start;
 }
 ```
@@ -88,7 +88,7 @@ The item width sets the peek: width = `100%` + gap − peek, since `100%` is the
 /* Good: full-bleed media inside a constrained article */
 .article {
   display: grid;
-  grid-template-columns: 1fr min(65ch, calc(100% - 48px)) 1fr;
+  grid-template-columns: 1fr min(55ch, calc(100% - 48px)) 1fr;
 }
 .article > * { grid-column: 2; }
 .article > .full-bleed { grid-column: 1 / -1; }

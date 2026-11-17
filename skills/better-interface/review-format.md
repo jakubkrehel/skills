@@ -8,7 +8,7 @@ State the exact scope, stack and styling conventions, the project convention doc
 
 | Domain | Evidence inspected | Result |
 | --- | --- | --- |
-| Accessibility | Files, components, states or checks | Findings count or `Clear` |
+| Accessibility | Files, components, states or checks | Findings count, including any the cap excluded, or `Clear` |
 
 Include every domain listed under **Use domain skills as the sources of truth**. `Clear` means inspected with no actionable finding; `Not reviewed` must explain why.
 
@@ -26,7 +26,7 @@ One table, ordered by severity, then by reach:
 - **Before** and **After** show the current implementation and an actionable replacement, each in its own cell.
 - **Why** names the violated principle and its user impact.
 
-With no findings, omit the table and state "No actionable interface findings."
+When the cap excluded findings, say how many under the table. With no findings, omit the table and state "No actionable interface findings."
 
 ## Verification
 

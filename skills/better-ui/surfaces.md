@@ -73,7 +73,7 @@ Start the icon side at `2px` less padding than the text side, then judge by eye.
 
 ### Play button triangles
 
-A triangle's geometric center sits left of its visual center, so shift it toward its point:
+A triangle centered by its bounding box looks pushed toward its flat side, so shift it toward its point:
 
 ```css
 .play-button svg {

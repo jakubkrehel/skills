@@ -92,15 +92,15 @@ Do not report scope creep. Whether a change does too much is a process question,
 
 ## 7. Hand the review to `better-interface`
 
-Hand `better-interface` the scope block, the affected surfaces and a status on every finding, and report in the format below.
+Hand `better-interface` the scope block and the affected surfaces. Give every finding its domain reviews return a status per **Classify every finding**, and report in the format below.
 
-If `better-interface` is unavailable, report the resolved scope and the file inventory, name it as the missing skill and stop. Do not invent a severity scale, a cap or a verdict.
+If `better-interface` is unavailable, report the scope block and the files in scope, name it as the missing skill and stop. Do not invent a severity scale, a cap or a verdict.
 
 ## Never mutate the working tree
 
 A change review is read-only, including the checkout. `git fetch` writes only to `.git` and is permitted. `gh pr checkout`, `git checkout`, `git switch` and `git stash` rewrite the files the author has open, so they are never permitted. Fetch pull request refs and read them in place.
 
-Rendered verification is opt-in here, in place of `better-interface`'s **Verify what can be verified**. Mark visual and runtime claims **Not verified** unless the project exposes a cheap preview or the user asks for a rendered review. For `working` and `branch`, the checkout already is the head, so render it in place. For any other target, render an isolated worktree such as `git worktree add /tmp/review-<n> refs/remotes/pr/<n>` and remove it when done.
+Rendered verification is opt-in here, in place of `better-interface`'s **Verify what can be verified**. Mark visual and runtime claims **Not verified** unless the project exposes a cheap preview or the user asks for a rendered review. A removal read off the diff with nothing replacing it is a source finding and needs no render. For `working` and `branch`, the checkout already is the head, so render it in place. For any other target, render an isolated worktree such as `git worktree add /tmp/review-<n> refs/remotes/pr/<n>` and remove it when done.
 
 ## Before you finish
 
@@ -140,7 +140,7 @@ Then the findings, with a `Status` column per **Classify every finding**:
 
 With no `Introduced` or `Regression` findings, omit the table and state "No actionable interface findings in this change."
 
-Then `Pre-existing` findings, at most three, highest severity first, stated plainly as not this change's responsibility. Omit the section when there are none.
+Then `Pre-existing` findings, at most three, highest severity first, stated plainly as not this change's responsibility. Say how many more exist. Omit the section when there are none.
 
 | Severity | Domain | Location | Issue |
 | --- | --- | --- | --- |

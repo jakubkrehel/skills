@@ -47,7 +47,11 @@ Recipes for interruptible transitions, press feedback, first-render behavior, th
 </button>
 
 // Motion
-<motion.button whileTap={disabled ? undefined : { scale: 0.96 }} disabled={disabled}>
+<motion.button
+  whileTap={disabled ? undefined : { scale: 0.96 }}
+  transition={{ duration: 0.15, ease: "easeOut" }}
+  disabled={disabled}
+>
   Click me
 </motion.button>
 ```
