@@ -11,10 +11,6 @@ Which notation to write colors in, how to convert between them and what happens 
 | `hsl()` | Channels look like design controls | Its lightness is not perceptual and its hue drifts; a ramp built by varying lightness bunches at one end and shifts hue |
 | `oklch()` | Perceptually uniform lightness, stable hue, predictable ramps | Baseline 2023, so very old browser matrices need a fallback |
 
-**Match whatever the project already uses.** Notation is not a defect: a project on hex is not doing it wrong.
-
-**For a genuinely new color system, `oklch()` is the best default.** Even lightness steps stay even, and a fixed hue stays fixed. See [palette-generation.md](palette-generation.md).
-
 ```css
 oklch(L C H)          /* lightness 0–1, chroma 0–~0.4, hue 0–360 */
 oklch(L C H / alpha)  /* alpha uses a slash, never a comma */

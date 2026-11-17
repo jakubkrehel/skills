@@ -128,7 +128,7 @@ The list's 6px padding keeps its own scrolling from clipping focus rings. The re
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  transition: color 200ms ease-out;
+  transition: color 200ms ease-out, font-weight 200ms ease-out;
 }
 
 .state-switcher button:hover {

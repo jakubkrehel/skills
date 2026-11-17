@@ -36,7 +36,7 @@ Group focus styles with `:focus-within` when a wrapper should light up while an 
 
 ## Focus not obscured
 
-Sticky chrome hides whatever scrolls under it, including the element that just received focus. Pad the scroll container by the sticky element's height with `scroll-padding-block-start`, and by a sticky footer or cookie banner's height with `scroll-padding-block-end`. The recipe is `better-layout`'s.
+Pad the scroll container with `scroll-padding-block-start` for a sticky header and `scroll-padding-block-end` for a sticky footer or cookie banner. The recipe is `better-layout`'s.
 
 ## Skip link
 
@@ -65,13 +65,11 @@ Give in-page anchor targets `scroll-margin-block-start`, such as `80px` under a 
 
 ## tabindex rules
 
-- `tabindex="0"`: adds an element to the natural tab order. Only for custom interactive elements that aren't natively focusable.
-- `tabindex="-1"`: focusable via JavaScript only (`el.focus()`). Use for headings you move focus to, modal containers and roving-tabindex members.
-- Positive `tabindex`: never. It hijacks the tab order for the whole page. Fix the DOM order instead.
+`tabindex="0"` is only for custom interactive elements that aren't natively focusable. `tabindex="-1"` suits headings you move focus to, modal containers and roving-tabindex members. Where a positive value was patching the order, fix the DOM order instead.
 
 ### Roving tabindex
 
-Composite widgets, meaning tabs, menus, toolbars and radio groups, occupy one Tab stop. The active item has `tabindex="0"`, all others `tabindex="-1"`, and arrow keys move both focus and the `0`:
+Tabs, menus, toolbars and radio groups each occupy one Tab stop. Arrow keys move both focus and the `0`:
 
 ```tsx
 <div role="tablist">

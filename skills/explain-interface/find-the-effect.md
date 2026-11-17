@@ -45,7 +45,7 @@ Search by property signature, not by guessing the element. You rarely know the m
 Read the result for the stack, not for one row:
 
 - **Compare `box` against `viewport`.** An element wider than the viewport, or with a negative offset, is oversized on purpose so its edges never show.
-- **Rows come back in DOM order.** Within one stacking context a later row roughly paints over an earlier one, and a positioned row with a higher `z` paints over both. Confirm the order at a pixel with **Narrowing to a region**.
+- **Rows come back in DOM order.** Within one stacking context a later row roughly paints over an earlier one. A positioned row with a higher `z` paints over both. Confirm the order at a pixel with **Narrowing to a region**.
 - **`backdropFilter` on any row.** That layer frosts something beneath it, so the layer beneath is part of the answer.
 - **`mixBlendMode` on any row.** The layer's color depends on what it covers, so you cannot explain it without naming what is underneath.
 
