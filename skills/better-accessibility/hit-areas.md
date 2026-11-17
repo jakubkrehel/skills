@@ -26,6 +26,7 @@ Where the visible element is smaller, say a 20×20 checkbox, extend the hit area
 ```css
 /* 20px checkbox with a 44px hit area, on the label wrapping the input */
 .checkbox-control {
+  display: inline-block;
   position: relative;
   width: 20px;
   height: 20px;

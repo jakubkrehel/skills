@@ -11,7 +11,7 @@ This skill holds the visual polish for surfaces, icons and motion, with the exac
 
 The values below are exact, not ranges to approximate. `cubic-bezier(0.2, 0, 0, 1)` is not `cubic-bezier(0.4, 0, 0.2, 1)`, and `0.96` is not `0.95`. The optical nudges and the concentric padding cutoff are the exceptions. They are starting points, judged by eye.
 
-Keep the project's component library, tokens and density, and match its motion language wherever no rule here gives a value. A deliberate and consistent project convention, such as a style with no shadows, is a preference and not a finding. The same detail done two ways within the project is a finding.
+Keep the project's component library, tokens and density, and match its motion language wherever no rule here gives a value. A deliberate and consistent project convention, such as a style with no shadows, is a preference and not a finding. That covers a value too, so a project that presses to `0.95` on every button keeps it. The same detail done two ways within the project is a finding.
 
 Text wrapping, font rendering, tabular numbers and text spacing belong to `better-typography`. Hit areas, keyboard support, ARIA and the reduced-motion requirement belong to `better-accessibility`. Grouping, section spacing, breakpoints and spatial RTL belong to `better-layout`, except directional icon mirroring. Color tokens and contrast measurement belong to `better-colors`.
 
@@ -49,7 +49,7 @@ Every animated state change also leaves a static cue in the form of a color, ico
 
 ## Gate motion behind the reduced-motion preference
 
-`better-accessibility` owns the requirement, and no recipe here ships without it. Run movement, scale and blur only under `prefers-reduced-motion: no-preference`. Under reduced motion, replace them with an opacity cross-fade rather than removing the element instantly. Recipes for CSS, Tailwind and Motion are in [animations.md](animations.md#reduced-motion-fallback).
+`better-accessibility` owns the requirement. Recipes in the reference files show the full-motion form, so add this gate and the query in **Hover effects only on hover-capable pointers** when you use one. Run movement, blur and entrance or exit scale only under `prefers-reduced-motion: no-preference`. The press scale stays, because it is brief feedback and not travel. Under reduced motion, replace them with an opacity cross-fade rather than removing the element instantly. Recipes for CSS, Tailwind and Motion are in [animations.md](animations.md#reduced-motion-fallback).
 
 ## Stagger infrequent entrances by 100ms
 
@@ -110,7 +110,7 @@ Icons use `currentColor` and take hover, selected and disabled states from CSS c
 | `:active` scale with no `:disabled` exclusion | `enabled:active:` or `:not(:disabled):active` |
 | `bounce:` set to anything but `0` | `bounce: 0` |
 | `opacity: 0` in a base rule that only an `animation` reveals | Hidden state in the `from` keyframe, `animation-fill-mode: both` |
-| `translate`, `scale`, `filter` or `motion.*` animation with no `prefers-reduced-motion`, `motion-safe:` or `MotionConfig` guard | Gate it and cross-fade opacity under reduced motion |
+| `translate`, `filter`, `motion.*` or a `scale` other than the press with no `prefers-reduced-motion`, `motion-safe:` or `MotionConfig` guard | Gate it and cross-fade opacity under reduced motion |
 | Color transitions plus a theme toggle with no `disableTransitionOnChange` or override | The theme-switch suppression recipe |
 | `will-change: all`, or `will-change` on an element that never animates | Name the animated property or delete it |
 | `fill="#..."` or `stroke="#..."` inside an icon SVG | `currentColor` |
@@ -119,15 +119,6 @@ Icons use `currentColor` and take hover, selected and disabled states from CSS c
 
 ## Reporting
 
-**Severity.** `HIGH` breaks an interaction, as a keyframe toggle that cannot reverse or a hover state stuck on touch does. Two of `better-interface`'s escalation triggers land here and are `HIGH` on sight. One is motion that ignores `prefers-reduced-motion`, and the other is a state change carried by motion alone. `MEDIUM` is a visible inconsistency in surfaces, icons or motion. `LOW` is isolated polish.
-
 **Verification.** Without a browser, read every state the component defines from the code, such as hover, pressed, selected, loading and empty, with its durations and easings. With one, walk each state and replay motion at 10% speed in the browser's Animations panel. Report every check you could not run as `Not verified`.
 
-**Format.** Group findings under the principle each violates, ordered by severity, one row per root cause listing every location it appears in:
-
-| Severity | Location | Before | After | Why |
-| --- | --- | --- | --- | --- |
-
-`Location` is `path/to/file:line`. `Why` names the principle and the user impact.
-
-End with `Block` when any `HIGH` remains, `Approve` otherwise, leaving the rest in the table as work to do. Never `Approve` coverage you did not inspect. With nothing to report, state "No actionable UI-polish findings" and report verification.
+A standalone review takes its severity ladder and format from [reporting.md](reporting.md).

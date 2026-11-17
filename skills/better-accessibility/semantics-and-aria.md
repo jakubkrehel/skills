@@ -77,4 +77,3 @@ Native `disabled` supplies the platform's complete disabled behavior. It removes
 - A natively `disabled` control suppresses pointer events and leaves the tab order, so a tooltip on it never opens for keyboard or touch users. Put the reason in visible text beside the control, or switch to `aria-disabled="true"`, which keeps it focusable and hoverable.
 - `aria-disabled="true"` also covers a custom control that cannot use native `disabled`. Style it explicitly, forced-colors mode included, and explain nearby why the action is unavailable.
 - Never set both `disabled` and `aria-disabled` on the same element.
-- Disabled controls are exempt from contrast minimums.

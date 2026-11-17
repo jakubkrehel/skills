@@ -18,7 +18,7 @@ You cannot even be sure an effect is CSS. A gradient may be a flat image, a `can
 
 ## Colors, which are the reliable part
 
-Sample the actual pixels rather than describing what you see. Then measure against `better-colors`, which owns these checks:
+Sample the actual pixels with a script on the image file rather than describing what you see. With no file to read, colors are estimates and tiered inferred. Then measure against `better-colors`, which owns these checks:
 
 - Convert each sample to OKLCH, so lightness is comparable across hues.
 - Sort by lightness to see whether the samples form a ramp. `better-colors` expects the steps to sit closer together at the light end, so report the spacing you find.

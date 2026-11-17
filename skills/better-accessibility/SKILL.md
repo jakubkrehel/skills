@@ -13,7 +13,7 @@ Contrast measurement and color fixes belong to `better-colors`. Text sizing, iOS
 
 ## Criteria, not conventions
 
-A finding cites a WCAG 2.2 Level A or AA criterion by number, or a concrete task an assistive-technology user cannot complete. Everything else is a recommendation and never `HIGH`. That covers AAA criteria, APG conventions, the one-`<h1>` and no-skipped-levels outline and the 44px and 40px targets. The criterion thresholds below are exact. The larger targets are heuristics, so keep an established, usable density.
+A finding cites a WCAG 2.2 Level A or AA criterion by number, a concrete task an assistive-technology user cannot complete or an escalation trigger listed in [reporting.md](reporting.md). Everything else is a recommendation and never `HIGH`. That covers AAA criteria, APG conventions, the one-`<h1>` and no-skipped-levels outline, validating on submit over a disabled button and the 44px and 40px targets. The criterion thresholds below are exact. The larger targets are heuristics, so keep an established, usable density.
 
 ## Native elements first
 
@@ -27,7 +27,7 @@ Use native `disabled` when a control is genuinely unavailable. Reach for `aria-d
 
 Style `:focus-visible`, not bare `:focus`. Keyboard users get a ring and mouse users usually don't. Prefer the browser's unmodified indicator.
 
-A custom ring needs a project focus token or another explicit color. It must reach 3:1 against every adjacent color it crosses, `currentColor` included, under 1.4.11. A `2px` solid perimeter with a 3:1 change of contrast is the 2.4.13 AAA target. Never use `outline: none` without a verified replacement, and preserve system colors in forced-colors mode.
+A custom ring needs a project focus token or another explicit color. It must reach 3:1 against every adjacent color it crosses under 1.4.11, and a ring drawn in `currentColor` gets the same check. A `2px` solid perimeter with a 3:1 change of contrast is the 2.4.13 AAA target. Never use `outline: none` without a verified replacement, and preserve system colors in forced-colors mode.
 
 A focused element must never sit fully hidden behind a sticky header, footer or banner (2.4.11). Pad the scroller by the sticky chrome's height, a fix `better-layout` owns. Recipes are in [focus-and-keyboard.md](focus-and-keyboard.md).
 
@@ -55,11 +55,11 @@ Every drag interaction needs a single-pointer alternative, such as buttons or a 
 
 Every input gets a `<label for>` or a wrapping `<label>`. A placeholder is never a label. Label and control share one hit target, with no dead zone between a checkbox and its text.
 
-Add a valid `autocomplete` token and a descriptive `name` attribute, plus the `type` and `inputmode` that summon the right keyboard. Never block paste; users paste passwords and one-time codes. See [forms.md](forms.md).
+Give fields about the user a valid `autocomplete` token. Add a descriptive `name` attribute, plus the `type` and `inputmode` that summon the right keyboard. Never block paste; users paste passwords and one-time codes. See [forms.md](forms.md).
 
 ## Errors that announce
 
-Validate on submit, never by disabling submit until the form is valid. Mark failing fields `aria-invalid="true"`, point `aria-describedby` at the inline error text and focus the first invalid field. Submit behavior while the request runs is in [forms.md](forms.md).
+Validate on submit, never by disabling submit until the form is valid. A destructive confirmation whose label states its one requirement, such as typing the object's name, may keep its button disabled until that is met. Mark failing fields `aria-invalid="true"`, point `aria-describedby` at the inline error text and focus the first invalid field. Submit behavior while the request runs is in [forms.md](forms.md).
 
 ## Accessible names everywhere
 
@@ -81,7 +81,7 @@ Inactive controls and logos are exempt. Use `better-colors` to measure the rende
 
 ## Honor prefers-reduced-motion
 
-Wrap motion in `@media (prefers-reduced-motion: no-preference)` so it is opt-in. Under reduced motion, replace slides and scales with opacity cross-fades, and kill parallax and autoplay entirely. See [motion-and-zoom.md](motion-and-zoom.md).
+Wrap movement, scale and blur in `@media (prefers-reduced-motion: no-preference)` so they are opt-in. Opacity fades, loading spinners, instant state changes and a brief press scale stay outside it. Under reduced motion, replace slides and scales with opacity cross-fades, and kill parallax and autoplay entirely. See [motion-and-zoom.md](motion-and-zoom.md).
 
 ## Nothing the user needs runs on a timer
 
@@ -99,7 +99,7 @@ Decorative images get `alt=""`. Informative images describe the meaning. Functio
 
 ## Structure is navigation
 
-Use headings that describe their sections and form a coherent outline. Expose one visible primary `<main>` landmark. When repeated navigation or chrome precedes it, make a "Skip to content" link the first focusable element. Anchored headings get `scroll-margin-block-start`.
+Use headings that describe their sections and form a coherent outline. Expose one visible primary `<main>` landmark. When repeated navigation or chrome precedes it, make a "Skip to content" link the first focusable element.
 
 ## Survive zoom and text resize
 
@@ -125,15 +125,6 @@ Text must survive 200% resize (1.4.4), and the page must reflow at 320px width w
 
 ## Reporting
 
-**Severity.** `HIGH` prevents a task, hides content from assistive technology or creates a systemic failure. `MEDIUM` makes an interaction meaningfully harder. `LOW` is isolated polish. This domain's share of `better-interface`'s escalation triggers is `HIGH` on sight. That is a missing accessible name, a missing focus indicator and a pointer path with no keyboard path. It is also motion ignoring reduced motion, loss at 320px or 200% and meaning carried by color alone.
-
 **Verification.** Without a browser: accessible names on every interactive element, keyboard handlers on non-native controls, focus styles, `prefers-reduced-motion` guards and form labels bound to their inputs. With one: tab the flow in order, read computed names and roles from the accessibility tree, confirm a visible focus indicator at every stop and run an automated audit. Report every check you could not run as `Not verified`.
 
-**Format.** Group findings under the principle each violates, ordered by severity, one row per root cause listing every location it appears in:
-
-| Severity | Location | Before | After | Why |
-| --- | --- | --- | --- | --- |
-
-`Location` is `path/to/file:line`. `Why` names the WCAG criterion or principle and the user impact.
-
-End with `Block` when any `HIGH` remains, `Approve` otherwise, leaving the rest in the table as work to do. Never `Approve` coverage you did not inspect. With nothing to report, state "No actionable accessibility findings" and report verification.
+A standalone review takes its severity ladder and format from [reporting.md](reporting.md).

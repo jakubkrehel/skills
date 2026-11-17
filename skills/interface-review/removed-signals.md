@@ -35,7 +35,7 @@ Restrict the search to deleted lines so additions do not mask a removal. Pass th
 ```bash
 git diff -U0 "$BASE" <head-ref> -- . <exclusions> \
   | grep -E '^-' | grep -vE '^--- (a/|/dev/null)' \
-  | grep -E 'aria-|role=|alt=|htmlFor|for=|scope=|focus|outline|tabindex|prefers-|lang=|dir=|text-wrap|line-clamp|overflow-wrap|tabular-nums|font-feature|inset-|-inline|-block'
+  | grep -E 'aria-|role=|alt=|htmlFor|for=|scope=|focus|outline|tabindex|prefers-|lang=|dir=|text-wrap|line-clamp|overflow-wrap|tabular-nums|font-feature|inset-|-inline|-block|<label|<button|<a[ >]|<nav|<main|<ul|motion-safe|motion-reduce'
 ```
 
 Leave `<head-ref>` off for a target that includes uncommitted work, so the diff runs against the working tree. Removed strings and swapped color tokens have no pattern; read those hunks.

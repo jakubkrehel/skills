@@ -95,7 +95,7 @@ Three things almost always need hand-tuning after the swap:
 Use one mechanism throughout:
 
 - **`prefers-color-scheme` alone** is correct with no theme toggle. Nothing to persist, nothing to hydrate.
-- **A `.dark` class** is required as soon as users can override the system setting. The media query then sets only the initial value.
+- **A `.dark` class** is required as soon as users can override the system setting. A script then reads the media query once to set the initial class.
 - **`light-dark()`** collapses both values into one declaration. It needs `color-scheme: light dark` and reads that property rather than a class, so a class-based toggle must set `color-scheme` too.
 
 ```css

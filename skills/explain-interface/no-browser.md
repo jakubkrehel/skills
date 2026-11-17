@@ -5,13 +5,13 @@ Fetch the HTML, then the stylesheets it links, then grep. That answers most ques
 Do not use a markdown-converting fetch for this. It strips exactly what you came for, so fetch the raw bytes. Work in a temporary directory, never in the user's project.
 
 ```bash
-cd "$(mktemp -d)"
+cd "$(mktemp -d)" && pwd
 curl -sL --max-time 25 "$URL" -o page.html
 wc -c page.html
 grep -oE 'href="[^"]*\.css[^"]*"' page.html | sed 's/href="//;s/"$//' | sort -u
 ```
 
-Pull each stylesheet the same way into `style.css`, resolving protocol-relative and root-relative hrefs against the page's origin first.
+Append each stylesheet to `style.css` with `curl -sL "$HREF" >> style.css`, resolving protocol-relative and root-relative hrefs against the page's origin first. Where the shell does not keep its directory between calls, `cd` into the printed path before each block below.
 
 ## Utility CSS is self-describing
 
@@ -31,8 +31,8 @@ Semantic CSS gives you a hashed class name instead, such as `Hero_glow__a1b2c`. 
 A multi-stop gradient is usually too specific for a utility, so it lands in a `style` attribute:
 
 ```bash
-grep -oE 'linear-gradient\([^)]*\)' page.html | sort -u | head
-grep -oE 'radial-gradient\([^)]*\)' page.html | sort -u | head
+grep -oE 'linear-gradient\(([^()]|\([^()]*\))*\)' page.html | sort -u | head
+grep -oE 'radial-gradient\(([^()]|\([^()]*\))*\)' page.html | sort -u | head
 grep -oE 'style="[^"]*(transform|filter|mask)[^"]*"' page.html | head
 ```
 

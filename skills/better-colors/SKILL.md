@@ -74,22 +74,11 @@ The space is a look, not a correctness setting. Default to `in oklab`, and reach
 | A contrast fix that changes hue and leaves lightness | Change lightness, the channel contrast responds to |
 | `prefers-contrast: more` overriding a color for both appearances in one block | Give each appearance its own increased-contrast value |
 | Text on a color with alpha, such as `/50`, `rgba(` or `color-mix(` with `transparent` | Measure the rendered result, or use a solid token |
-| `text-white` on a Tailwind `500` fill | Measure it; white on most `500` hues fails 4.5:1, so move the fill to `600` |
+| `text-white` on a Tailwind `500` fill | Measure and report it; white on most `500` hues and several `600` hues fails 4.5:1 |
 | `oklch()` chroma beyond sRGB with no sRGB value declared before it | Declare the sRGB value first, then the vivid one inside `@media (color-gamut: p3)` |
 
 ## Reporting
 
-**Severity.** `HIGH` makes content unreadable or assigns a misleading semantic color. `MEDIUM` is a noticeable theme, token or gamut failure. `LOW` is isolated polish.
-
-Three symptoms are `HIGH` on sight whatever the surface, matching `better-interface`'s escalation triggers. They are body or control text whose rendered pair fails its required ratio, state or meaning carried by color alone and a semantic color used against its meaning.
-
 **Verification.** Without a browser: token values, the gamut of every declared color, both theme blocks present and contrast computed from the declared token pair. With one: the background actually rendered behind the text, including opacity and any image beneath it, measured in both light and dark. Report every check you could not run as `Not verified`.
 
-**Format.** Group findings under the principle each violates, ordered by severity, one row per root cause listing every location it appears in:
-
-| Severity | Location | Before | After | Why |
-| --- | --- | --- | --- | --- |
-
-`Location` is `path/to/file:line`. `Why` names the principle and the user impact.
-
-End with `Block` when any `HIGH` remains, `Approve` otherwise, leaving the rest in the table as work to do. Never `Approve` coverage you did not inspect. With nothing to report, state "No actionable color findings" and report verification.
+A standalone review takes its severity ladder and format from [reporting.md](reporting.md).

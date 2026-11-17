@@ -28,7 +28,7 @@ Keep the in-progress and done strings parallel, so "Saving changes…" resolves 
 
 ## Plurals and placeholders
 
-Write one message per sentence in ICU MessageFormat, which most i18n libraries read. The variable sits inside the sentence and the translator moves it:
+Write one message per sentence in the project's message format, shown here in ICU MessageFormat. The variable sits inside the sentence and the translator moves it:
 
 ```text
 inbox.count = {count, plural,

@@ -33,7 +33,7 @@ The most important content sits near the top and the leading edge. Within a row,
 
 ## One primary action per view
 
-Give each view one primary action. Put secondary actions behind a menu once there are more than 3. Prefer a short view that links deeper over one long view that shows everything at the top level. `better-colors` owns how color marks the primary action.
+Give each view one primary action. Once a view has more than 3 secondary actions, put them behind a menu. Prefer a short view that links deeper over one long view that shows everything at the top level. `better-colors` owns how color marks the primary action.
 
 ## Hint at hidden content
 
@@ -83,15 +83,6 @@ Never park a critical action where resizing, zoom or scrolling clips it. Keep it
 
 ## Reporting
 
-**Severity.** `HIGH` blocks content or an action at a supported viewport. Clipping or overlap at 320px width or 200% zoom is always `HIGH`, as is truncated content with no way to the full value. So is content past a scroll edge or behind a disclosure with no visible cue. `MEDIUM` harms hierarchy, reading order or adaptability. `LOW` is isolated alignment or spacing polish.
-
 **Verification.** Without a browser, check logical properties in place of physical ones, container and media queries against the supported viewport list and DOM order against visual order. With one, check every supported width, 320px, 200% zoom and the RTL mirror. Report every check you could not run as `Not verified`.
 
-**Format.** Group findings under the principle each violates, ordered by severity, one row per root cause listing every location it appears in:
-
-| Severity | Location | Before | After | Why |
-| --- | --- | --- | --- | --- |
-
-`Location` is `path/to/file:line`. `Why` names the principle and the user impact.
-
-End with `Block` when any `HIGH` remains, `Approve` otherwise, leaving the rest in the table as work to do. Never `Approve` coverage you did not inspect. With nothing to report, state "No actionable layout findings" and report verification.
+A standalone review takes its severity ladder and format from [reporting.md](reporting.md).

@@ -90,6 +90,6 @@ Tailwind v4 generates utilities from `@theme`, so names declared there become th
 
 That yields `bg-accent-solid` and `text-text-secondary` alongside `bg-blue-600`. Tailwind prefixes every `--color-*` name with the utility, so a `text-` token doubles. Accept the doubling, or follow the convention the project already uses. Both tiers are reachable, so the discipline is a convention rather than a constraint. Templates use the semantic utilities, and a raw `bg-blue-600` in a component is the thing to flag.
 
-Repoint semantics for dark mode in a `.dark` block outside `@theme`. Leave the block without `inline`, so utilities read the semantic variable at render time.
+Repoint semantics for dark mode in a `.dark` block outside `@theme`. Leave the `@theme` block without `inline`, so utilities read the semantic variable at render time.
 
 Opacity modifiers work on either tier, as in `bg-accent-solid/50`. But a color carrying alpha cannot be contrast-checked against a static background, because what it renders depends on what sits behind it. Use solid tokens for anything with text on it.

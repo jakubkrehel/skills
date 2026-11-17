@@ -26,7 +26,7 @@ Every `SKILL.md` carries:
 - **Headings that carry the point**, in sentence case. `Native elements first`, not `Semantics`. Number them only where the steps genuinely run in order, as in a verb skill's procedure. Numbering flat reference implies a sequence that isn't there and makes every insertion a renumber.
 - **A hand-off line** naming the sibling skills that own adjacent topics.
 - **A `## Before you finish` table**, two columns, where the domain has recurring mistakes. The left column is the detection pattern, which is what a principle statement does not give you. The heading names the moment on purpose: `Common mistakes` is a label an agent reads past while orienting, and `Before you finish` names the point in the work where the table is worth consulting.
-- **A `## Reporting` section** in every domain skill, carrying that domain's severity ladder, its verification checks and the format for a standalone review. See below.
+- **A `## Reporting` section** in every domain skill, carrying that domain's verification checks and linking its `reporting.md`. That file holds the severity ladder and the format for a standalone review, which only a review needs, so they stay out of the entry file. See below.
 
 Supporting `.md` files carry depth beyond the principle statements: recipes, code patterns, lookup tables. Link each one from the principle that needs it, so the link sits where the agent lands. A principle states the rule and links out for the recipe. It never restates the reference file in shorter form, and the reference file never restates the principle in longer form.
 
@@ -36,7 +36,7 @@ Point at a principle by its heading in bold (**Classify every finding**), never 
 
 ### The review format
 
-Each skill carries the format for the review it produces. `better-interface` holds the orchestrated format in `review-format.md`: scope and coverage, the findings table, verification and the verdict. A domain skill's `## Reporting` holds the smaller standalone format, grouped by the principle each finding violates and with no `Domain` column. `interface-review` holds the change-scoped format, with its status column and its pre-existing section, and `better-interface` points at it rather than keeping a second copy.
+Each skill carries the format for the review it produces. `better-interface` holds the orchestrated format in `review-format.md`: scope and coverage, the findings table, verification and the verdict. A domain skill's `reporting.md` holds the smaller standalone format, grouped by the principle each finding violates and with no `Domain` column. `interface-review` holds the change-scoped format, with its status column and its pre-existing section, and `better-interface` points at it rather than keeping a second copy.
 
 Those three overlap, and that overlap is the price of a skill that works when installed alone. Someone who installs only `better-typography` has no `better-interface` on disk to read a format out of.
 

@@ -9,21 +9,18 @@ Tailwind 4 equivalents for the declarations in this skill whose utility is not t
 | `-webkit-font-smoothing` + `-moz-osx-font-smoothing` | `antialiased` |
 | `overflow: hidden` + `text-overflow: ellipsis` + `white-space: nowrap` | `truncate` |
 | `-webkit-line-clamp` + `display: -webkit-box` + `-webkit-box-orient: vertical` + `overflow: hidden` | `line-clamp-*` |
-| `max-width` capping text at 60–75 characters | `max-w-xl` / `max-w-2xl` / `max-w-prose` |
+| `max-width` capping text at 60–75 characters | `max-w-md` / `max-w-lg` |
 
 ## Arbitrary values only
 
 | Declaration | Tailwind |
 | --- | --- |
-| `font-synthesis: none` | `[font-synthesis:none]` |
-| `font-feature-settings` | `[font-feature-settings:"ss01"]` |
+| `font-synthesis-weight: none` | `[font-synthesis-weight:none]` |
 | `font-variation-settings` | `[font-variation-settings:"GRAD"_80]` |
 | `font-variant-caps` | `[font-variant-caps:small-caps]` |
 | `font-variant-position` | `[font-variant-position:super]` |
-| `font-kerning` | `[font-kerning:none]` |
 | `text-box: trim-both cap alphabetic` | `[text-box:trim-both_cap_alphabetic]` |
 | `text-underline-position: from-font` | `[text-underline-position:from-font]` |
-| `text-decoration-skip-ink` | `[text-decoration-skip-ink:auto]` |
 | `-webkit-text-stroke` | `[-webkit-text-stroke:1px_black]` |
 | `initial-letter` | `[initial-letter:3]` |
 
