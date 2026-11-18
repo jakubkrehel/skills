@@ -16,7 +16,7 @@ function Card({ expanded }) {
 }
 ```
 
-Several elements can move at once when each pair has its own id, as in `circle-1`, `circle-2` and `circle-3`. An id that appears on two elements in the same render breaks the animation, so build ids in a list from the item's key.
+Several elements can move at once when each pair has its own id, as in `circle-1`, `circle-2` and `circle-3`. Unrelated elements that share an id animate into each other, so build ids in a list from the item's key.
 
 ### Values that differ between states
 
@@ -32,7 +32,7 @@ Position and size come from each state's classes. A value Motion has to interpol
 
 ### With AnimatePresence
 
-Content that fades while the shared element moves sits inside `AnimatePresence`. The shared element sits outside it:
+Content that fades while the shared element moves sits inside `AnimatePresence`. A shared element that swaps one state for the other sits outside it:
 
 ```tsx
 <AnimatedCircle layoutId="circle-1" />
@@ -51,7 +51,7 @@ Content that fades while the shared element moves sits inside `AnimatePresence`.
 <AnimatedCircle layoutId="circle-2" />
 ```
 
-A `layoutId` element placed inside runs its `initial` and `exit` during the move, and an opacity exit makes it fade mid-flight.
+A `layoutId` element runs its `initial` and `exit` during the move, and an opacity exit makes it fade mid-flight. Give it neither.
 
 ### Tab indicator
 
@@ -82,7 +82,17 @@ Two tab groups on one page need two different ids.
 
 ### Card to dialog
 
-A card that opens into a dialog is the same pattern. The card and the dialog popup are separate components that share a `layoutId`. Keep the project's dialog primitive for focus and dismissal, and render the popup as a `motion` element.
+The card and the dialog popup are separate components that share a `layoutId`, and the card stays mounted behind the dialog. Motion cross-fades two mounted elements that share an id. `AnimatePresence` keeps the popup in the DOM on close until it has animated back to the card:
+
+```tsx
+<motion.button layoutId={`card-${id}`} onClick={() => setOpen(true)} />
+
+<AnimatePresence>
+  {open && <motion.div layoutId={`card-${id}`} />}
+</AnimatePresence>
+```
+
+The popup takes no `initial` or `exit` props. Keep the project's dialog primitive for focus and dismissal, and render the popup as a `motion` element.
 
 ## Presence modes
 

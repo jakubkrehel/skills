@@ -11,7 +11,7 @@ How to slow an animation down and what to look for once it is slow.
 | An empty gap sits in the container before it finishes shrinking | The content is removed before the container closes |
 | The element jumps `1px`–`2px` on the first or last frame | The layer is promoted and dropped. See [performance.md](performance.md#use-will-change-sparingly) |
 | A popup grows from its center while anchored to a trigger | No `transform-origin` |
-| A shared element fades partway through its move | Its `layoutId` sits inside `AnimatePresence` |
+| A shared element fades partway through its move | Its `layoutId` element carries `initial` or `exit` props |
 | The height snaps on the first open and animates after | The first measurement was `0` |
 
 Fade content over the same duration as the container it sits in, so neither finishes before the other.

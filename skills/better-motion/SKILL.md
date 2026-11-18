@@ -96,11 +96,13 @@ Where an icon swaps on an infrequent state change, such as play to pause or copy
 
 A tab's icon swap and the actions a row reveals on hover fall under **How often it is seen decides whether it moves**. Both recipes are in [icon-transitions.md](icon-transitions.md).
 
-## One layoutId per element on screen
+## One layoutId per shared element
 
-Motion animates between two elements that share a `layoutId`, even when they render in different places with different sizes. The id is unique among the elements rendered at the same moment, and two at once break the animation.
+Motion animates between two elements that share a `layoutId`, even when they render in different places with different sizes. Give each pair its own id. Unrelated elements that share one, such as list rows or two tab groups, animate into each other.
 
-Keep an element with a `layoutId` outside `AnimatePresence`, or its `initial` and `exit` run during the move. Pass a value that differs between the two states, such as `borderRadius`, through `animate` and never a class. See [layout-animation.md](layout-animation.md).
+The two may be mounted together. Where the origin stays on the page, as a card does behind its dialog, Motion cross-fades them. Wrap the new element in `AnimatePresence` so it animates back to the origin on close.
+
+Leave `initial` and `exit` off an element with a `layoutId`, because they run during the move. Pass a value that differs between the two states, such as `borderRadius`, through `animate` and never a class. See [layout-animation.md](layout-animation.md).
 
 ## Choose the AnimatePresence mode by where the children sit
 
@@ -166,8 +168,8 @@ Speed hides flaws. Replay every animation you built or changed at a tenth of its
 | `filter` animated by Motion with `MotionConfig reducedMotion` as its only guard | Branch on `useReducedMotion()` |
 | Color transitions plus a theme toggle with no `disableTransitionOnChange` or override | The theme-switch suppression recipe |
 | `will-change: all`, or `will-change` on an element that never animates | Name the animated property or delete it |
-| One `layoutId` on two elements rendered together | A unique id for each |
-| A `layoutId` element directly inside `AnimatePresence` with `initial` or `exit` props | Move it outside |
+| One `layoutId` on unrelated elements, such as list rows or two tab groups | An id for each pair, built from the item's key |
+| `initial` or `exit` props on a `layoutId` element | Remove them, and keep `AnimatePresence` only where the origin stays mounted |
 | A direct child of `AnimatePresence` with no `key` | Key it by the state |
 | `height: "auto"` animated on a container whose children swap | The measured height |
 | A measuring `ref` on the element whose height animates | An inner wrapper |

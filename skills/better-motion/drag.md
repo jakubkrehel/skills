@@ -65,9 +65,12 @@ useMotionValueEvent(x, "change", setOffset);
 <motion.button
   animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.5 }}
   aria-label={label}
+  inert={!isVisible}
   initial={{ opacity: 0, scale: 0.5 }}
 />
 ```
+
+An action at `opacity: 0` still takes focus and clicks, so `inert` removes it from the tab order and the hit area until it shows. React before 19 drops a boolean `inert`, so use `disabled` there.
 
 A status dot that appears after the action completes scales from its own corner:
 
