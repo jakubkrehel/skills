@@ -103,9 +103,18 @@ Done when every pattern has a number of your own or is dropped.
 
 ## 6. Generate widely
 
-Write every candidate the confirmed patterns suggest into the notes, at least two per pattern on different rungs. Pad to no number. Add three that are out of the box, such as a tool the person has never asked for. Those may be guesses.
+Write every candidate the confirmed patterns suggest into the notes, at least two per pattern on different rungs. Pad to no number.
 
-Give each its evidence, its rung and its size as small, medium or large. Save the list before the next step.
+Then add about five that are out of the box, which no pattern suggested. Those may be guesses. Look for them in these places:
+
+- A rung left empty in **Map what already exists**.
+- An installed skill nobody runs.
+- Work the person does by hand outside the agent, such as recording the screen.
+- A check that projects of this kind usually have.
+
+A variation on a candidate already listed is folded into that candidate and never counted as a guess.
+
+Give each its evidence, its rung and its size as small, medium or large. A guess carries what in the project prompted it in place of evidence. Save the list before the next step.
 
 Done when every confirmed pattern has candidates or a reason it has none.
 
@@ -125,7 +134,7 @@ Each candidate ends kept, merged into another or cut with its reason.
 
 Lead with what the history shows in five findings or fewer, each with its number. Then the proposals, strongest evidence first and numbered in one run, so the person can answer "build 1, 2 and 6". Give each one line for what it does and one for its count and a single quote. Mark the ones to confirm first.
 
-Put the out-of-the-box ideas last, under their own heading. Close with what you would not build and why, what the run could not read and where the working files are.
+Put the out-of-the-box ideas last, under their own heading. Give each one line for what it does and one for what in the project prompted it. Close with what you would not build and why, what the run could not read and where the working files are.
 
 ## 9. Build what was picked
 
