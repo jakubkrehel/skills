@@ -36,7 +36,7 @@ function IconButton({ isActive, icon: Icon }) {
 
 The wrapper is `inline-flex` because a transform does nothing on an inline box. `initial={false}` keeps the default icon from animating in on mount. `useReducedMotion()` drops scale and blur under the preference, so only the opacity cross-fade runs.
 
-Where the icon jumps a pixel as the swap starts or settles, add `will-change: transform` to the icon and to its `motion` wrapper. Keep it there afterwards.
+Where the icon jumps a pixel as the swap starts or settles, add `will-change: transform` to the icon and to its `motion` wrapper.
 
 ## CSS, both icons in the DOM
 

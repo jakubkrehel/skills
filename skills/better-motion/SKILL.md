@@ -138,9 +138,7 @@ Name the exact properties, as in `transition-property: scale, opacity`, and neve
 
 ## will-change fixes a jump you have seen
 
-Add `will-change` only after you see the first frame stutter, or the element shift by `1px`–`2px` as its animation starts or settles. That shift shows most in Safari on iOS. Name the property you animate: `scale` for `scale`, `transform` for `transform`. Limit it to transform properties, `opacity` and `filter`, and never use `all`.
-
-A `will-change` already sitting on an element that animates is a fix somebody made. Never remove or rename it as cleanup. See [performance.md](performance.md#use-will-change-sparingly).
+Add `will-change` only after you see the first frame stutter, or the element shift by `1px`–`2px` as its animation starts or settles. That shift shows most in Safari on iOS. Name the property you animate: `scale` for `scale`, `transform` for `transform`. Limit it to transform properties, `opacity` and `filter`, and never use `all`. See [performance.md](performance.md#use-will-change-sparingly).
 
 ## Load only the Motion features in use
 
@@ -168,7 +166,6 @@ Speed hides flaws. Replay every animation you built or changed at a tenth of its
 | `filter` animated by Motion with `MotionConfig reducedMotion` as its only guard | Branch on `useReducedMotion()` |
 | Color transitions plus a theme toggle with no `disableTransitionOnChange` or override | The theme-switch suppression recipe |
 | `will-change: all`, or `will-change` on an element that never animates | Name the animated property or delete it |
-| A diff that deletes `will-change` from an element that still animates | Restore it |
 | One `layoutId` on two elements rendered together | A unique id for each |
 | A `layoutId` element directly inside `AnimatePresence` with `initial` or `exit` props | Move it outside |
 | A direct child of `AnimatePresence` with no `key` | Key it by the state |
