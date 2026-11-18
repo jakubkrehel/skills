@@ -1,5 +1,5 @@
 interface:
   display_name: "Upskill"
-  short_description: "Propose tooling for a project from your past agent sessions"
+  short_description: "Propose tooling from a project's record and your past agent sessions"
 policy:
   allow_implicit_invocation: false
