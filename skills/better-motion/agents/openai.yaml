@@ -1,0 +1,3 @@
+interface:
+  display_name: "Better Motion"
+  short_description: "When to animate, exact values and recipes for transitions, layout animation and drag"

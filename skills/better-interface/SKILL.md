@@ -1,13 +1,13 @@
 ---
 name: better-interface
-description: Reviews a screen, flow or whole interface across accessibility, layout, writing, typography, color and UI polish, and returns one ranked report.
+description: Reviews a screen, flow or whole interface across accessibility, layout, writing, typography, color, UI polish and motion, and returns one ranked report.
 ---
 
 # Interface
 
 This skill runs a cross-discipline review. It routes the interface to each `better-*` skill, collects their evidence and consolidates one ranked verdict.
 
-Orchestration is all it owns. Accessibility rules belong to `better-accessibility`, structure to `better-layout`, copy to `better-writing`, type to `better-typography`, color to `better-colors`, visual polish and motion to `better-ui`.
+Orchestration is all it owns. Accessibility rules belong to `better-accessibility`, structure to `better-layout`, copy to `better-writing`, type to `better-typography`, color to `better-colors`, visual polish to `better-ui` and motion to `better-motion`.
 
 Change-scoped review of uncommitted work, branches and pull requests belongs to `interface-review`.
 
@@ -49,6 +49,7 @@ Load every owning skill below and complete each domain review before consolidati
 4. `better-typography`
 5. `better-colors`
 6. `better-ui`
+7. `better-motion`
 
 From each, take its principles, its references and its verification checks. Its severity ladder and its format are for standalone use; the ones in this file replace them.
 

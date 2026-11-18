@@ -1,6 +1,6 @@
 # Enter and exit animations
 
-Recipes for staged entrances and the exits that follow them. For interactive state feedback see [animations.md](animations.md), and for icon swaps see [icon-transitions.md](icon-transitions.md).
+Recipes for staged entrances and the exits that follow them. For interactive state feedback see [transitions.md](transitions.md), and for icon swaps see [icon-transitions.md](icon-transitions.md).
 
 ## Enter animations
 
@@ -38,6 +38,8 @@ function PageHeader() {
   );
 }
 ```
+
+Recent Motion versions deprecate `staggerChildren` in favor of `delayChildren: stagger(0.1)`. Use the one the installed version documents.
 
 ### CSS
 
@@ -85,7 +87,7 @@ A popover, dialog or element toggled from `display: none` has no previous style 
 
 [popover]:popover-open {
   opacity: 1;
-  transition-duration: 300ms;
+  transition-duration: 250ms;
 }
 
 @starting-style {
@@ -113,6 +115,39 @@ A popover, dialog or element toggled from `display: none` has no previous style 
 ```
 
 `@starting-style` and discrete `display` transitions are Baseline 2024. `overlay` is Chromium only, and browsers without support show and hide instantly.
+
+## Origin from the trigger
+
+The popup scales from the side its trigger sits on. Positioning libraries publish that side as a variable, so the origin follows when the popup flips:
+
+```css
+/* Base UI */
+.popup {
+  transform-origin: var(--transform-origin);
+}
+
+/* Radix */
+.popover-content {
+  transform-origin: var(--radix-popover-content-transform-origin);
+}
+```
+
+Radix names the variable after the component, as in `--radix-dropdown-menu-content-transform-origin` and `--radix-tooltip-content-transform-origin`. Without a library, set it by hand, such as `transform-origin: top left` for a menu that opens below the left edge of its button.
+
+## Menus opened all day
+
+A context menu or a command menu opens at once and animates only as it closes. With Base UI, style the ending state and leave the starting state alone:
+
+```css
+.popup {
+  transition: opacity 150ms ease-out, scale 150ms ease-out;
+}
+
+.popup[data-ending-style] {
+  opacity: 0;
+  scale: 0.99;
+}
+```
 
 ## Exit animations
 

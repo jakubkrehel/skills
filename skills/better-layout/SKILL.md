@@ -9,7 +9,7 @@ This skill sets grouping, alignment, spacing and responsive structure. It then s
 
 Write every fix in the project's styling system. The numbers below apply only where the project has no spacing scale or density system; otherwise use its tokens. A finding needs a failure you can show, such as a clip, an overlap, a broken mirror or a misread group. A value that differs from these starting points is not one.
 
-Hit areas and focus behavior belong to `better-accessibility`. Radius, shadows and animation belong to `better-ui`. Line length, text spacing and truncation mechanics belong to `better-typography`. The words themselves belong to `better-writing`.
+Hit areas and focus behavior belong to `better-accessibility`. Radius and shadows belong to `better-ui`, and animation to `better-motion`. Line length, text spacing and truncation mechanics belong to `better-typography`. The words themselves belong to `better-writing`.
 
 ## Group with space, not lines
 

@@ -1,6 +1,6 @@
 # Icon transitions
 
-Cross-fade recipes for an icon that swaps on a state change, with and without a motion library. Icon weight, color and direction live in [icons.md](icons.md).
+Cross-fade recipes for an icon that swaps on a state change, with and without a motion library. Icon weight, color and direction belong to `better-ui`.
 
 ## Which library
 
@@ -19,6 +19,7 @@ function IconButton({ isActive, icon: Icon }) {
     <button className="relative">
       <AnimatePresence initial={false} mode="popLayout">
         <motion.span
+          className="inline-flex"
           key={isActive ? "active" : "inactive"}
           initial={hidden}
           animate={shown}
@@ -33,7 +34,9 @@ function IconButton({ isActive, icon: Icon }) {
 }
 ```
 
-`initial={false}` keeps the default icon from animating in on mount. `useReducedMotion()` drops scale and blur under the preference, so only the opacity cross-fade runs.
+The wrapper is `inline-flex` because a transform does nothing on an inline box. `initial={false}` keeps the default icon from animating in on mount. `useReducedMotion()` drops scale and blur under the preference, so only the opacity cross-fade runs.
+
+Where the icon jumps a pixel as the swap starts or settles, add `will-change: transform` to the icon and to its `motion` wrapper. Keep it there afterwards.
 
 ## CSS, both icons in the DOM
 

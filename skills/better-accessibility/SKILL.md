@@ -9,7 +9,7 @@ This skill reviews and fixes semantics, keyboard and focus behavior, accessible 
 
 Reviewing means two walks. Keyboard-only, where every flow completes without a mouse. Then screen-reader, where every control announces a name, a role and its state. When unsure, take the platform default over a custom rebuild, and remove ARIA rather than add it.
 
-Contrast measurement and color fixes belong to `better-colors`. Text sizing, iOS input zoom and language metadata belong to `better-typography`. Spacing between targets and spatial RTL belong to `better-layout`. Label, error and alt-text wording belong to `better-writing`. Animation recipes, hover styling and scroll containment belong to `better-ui`.
+Contrast measurement and color fixes belong to `better-colors`. Text sizing, iOS input zoom and language metadata belong to `better-typography`. Spacing between targets and spatial RTL belong to `better-layout`. Label, error and alt-text wording belong to `better-writing`. Animation recipes belong to `better-motion`. Hover styling and scroll containment belong to `better-ui`.
 
 ## Criteria, not conventions
 

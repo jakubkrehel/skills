@@ -69,7 +69,7 @@ Where an icon set offers outline and filled variants, use them as a state pair, 
 <TabIcon variant="solid" />
 ```
 
-Cross-fade the swap with the values in [icon-transitions.md](icon-transitions.md) only where the change is infrequent, such as a bookmark or a like. An active tab swaps instantly.
+Cross-fade the swap only where the change is infrequent, such as a bookmark or a like, with the values `better-motion` gives. An active tab swaps instantly.
 
 ## Design at render size
 

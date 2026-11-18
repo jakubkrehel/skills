@@ -1,6 +1,6 @@
 # Performance
 
-Recipes for transition specificity and compositing hints.
+Recipes for transition specificity, compositing hints and loading Motion in parts.
 
 ## Transition only what changes
 
@@ -34,6 +34,8 @@ In Tailwind 4, `transition-transform` covers `transform, translate, scale, rotat
 
 `will-change` promotes an element to its own compositing layer ahead of time. Without it the browser promotes when the animation starts, and that one-time promotion can stutter on the first frame. Each extra layer costs memory, so never add it preemptively.
 
+The same promotion can also move the element by `1px`–`2px` on the first or last frame, most visibly in Safari on iOS. `will-change: transform` keeps the layer for the whole animation and removes the jump.
+
 ```css
 /* Good: names the property that animates */
 .animated-card {
@@ -61,3 +63,23 @@ In Tailwind 4, `transition-transform` covers `transform, translate, scale, rotat
 | `background`, `border`, `color` | No |
 
 `will-change` on a transform property or `filter` makes the element the containing block for its `position: fixed` descendants, so a fixed modal or tooltip inside it stops tracking the viewport. Any of these values also creates a stacking context, which can reorder `z-index` against siblings.
+
+## Lazy Motion
+
+`LazyMotion` loads Motion's features separately from the components, and the `m` components are the ones that work inside it:
+
+```tsx
+import { domMax, LazyMotion, MotionConfig } from "motion/react";
+import * as m from "motion/react-m";
+
+<LazyMotion features={domMax}>
+  <MotionConfig reducedMotion="user">{children}</MotionConfig>
+</LazyMotion>
+```
+
+| Feature set | Covers |
+| --- | --- |
+| `domAnimation` | Animations, variants, exits and the hover, tap and focus gestures |
+| `domMax` | Everything in `domAnimation`, plus drag, pan and layout animation |
+
+Follow what the project already does. Never add `LazyMotion` to a project that imports `motion` directly, since mixing the two loads the full bundle anyway.
