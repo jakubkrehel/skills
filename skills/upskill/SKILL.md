@@ -1,12 +1,12 @@
 ---
 name: upskill
-description: Studies your past agent sessions on a project and proposes the skills, hooks and automations that would have saved you the most time, then builds the ones you pick.
+description: Studies a project and your past agent sessions on it, proposes the skills, hooks and automations that would have saved you the most time, then builds the ones you pick.
 disable-model-invocation: true
 ---
 
 # Upskill
 
-This skill reads everything you have typed to coding agents on one project and finds where your time and patience went. It proposes tooling fitted to that project and ranks it by evidence. Then it builds what you pick.
+This skill reads everything you have typed to coding agents on one project and the record the project keeps of itself, and finds where your time and patience went. It proposes tooling fitted to that project and ranks it by what each pattern cost you. Then it builds what you pick.
 
 Improving the product itself while you're away is `afk`. This skill improves how you and the agent work on it.
 
@@ -18,11 +18,19 @@ Readers do the first read. You read their reports in full, then every correction
 
 Weight the last month above the rest. It shows how the person works today, and a habit that stopped appearing may be one they already dropped. When the whole history is younger than two months, weight its last third instead and say so in the report.
 
+## Two records, and one of them expires
+
+The history says what the person asked for. The project record says what happened, in commits, pull requests, CI runs and the files as they stand. Read both with the same care.
+
+Harnesses delete old sessions, and the record does not expire. When most of the history is gone, the run rests on the record and the report says which counts come from it.
+
 ## Evidence, not hunches
 
-Every proposal carries a count, given as prompts and days. Its two or three dated quotes go in the notes. An idea with neither is cut. A promising one may sit in the out-of-the-box list, labelled as a guess.
+Every proposal carries a count. From the history it is prompts and days. From the record it is commits, pull requests or CI runs and their dates. Its two or three dated quotes or commit subjects go in the notes. An idea with neither is cut. A promising one may sit in the out-of-the-box list, labelled as a guess.
 
 A pattern that shows only on the agent's side, such as one command run again and again, is counted in the full sessions and labelled as such.
+
+Every proposal also carries its cost, which is what recovering took. Count the prompts in each "still broken" streak and each re-ask, plus the fix-up commits and failed runs the pattern left behind. A habit that works costs nothing, however often it appears.
 
 Report what does not recur as well. "Refunds came up twice in seven months" stops a refund tool from being built.
 
@@ -59,7 +67,7 @@ Read the agent docs, hooks, harness settings, saved memory, CI workflows and pac
 
 Done when the notes list what the project already has on each rung.
 
-## 2. Collect the history
+## 2. Collect the history and the record
 
 Find where each harness on this machine keeps its sessions. [sources.md](sources.md) lists the usual places and how to confirm each one. Include every path the project has lived at, since worktrees and renamed folders log under their own names.
 
@@ -69,7 +77,7 @@ A prompt file may show a paste or an image as a placeholder such as `[Pasted tex
 
 Pull the pull request list, the commit log across all branches and the last 50 CI runs alongside them. Keep the run's notes in `.upskill/notes.md`.
 
-Done when the notes state the prompt count, the date range, each missing source and how many pastes could not be recovered.
+Done when the notes state the prompt count, the date range, each missing source and how many pastes could not be recovered. They also state how many commits, pull requests and CI runs the record holds.
 
 ## 3. Count before reading
 
@@ -80,6 +88,7 @@ Counts come from a script, never from an impression. Tally:
 - Screenshots, pasted blocks and prompts under 25 characters, by their placeholders.
 - Skills and commands the agent ran itself, from the full sessions. A script may read every session for this, since nothing but the totals leaves it.
 - Pull requests by type, size, time to merge and CI result. With fewer than ten, tally commit subjects by type instead.
+- Reverts, commits that fix the commit before them and failed CI runs by the step that failed.
 
 Done when the tallies are in the notes, with each installed skill marked used or unused.
 
@@ -89,6 +98,8 @@ Give each file to its own reader with the brief in [reader-brief.md](reader-brie
 
 Where subagents are unavailable, read the files yourself in order and answer the same brief for each.
 
+Read the record yourself while the readers work. Go through the commit subjects in order, the log of each failed CI run and the diff of each revert. List what recurs in the notes, with dates.
+
 Save each report in `.upskill/` as it arrives. Done when every file has a saved report and you have read each one.
 
 ## 5. Check the claims
@@ -97,15 +108,26 @@ A reader's count is an estimate, and the report uses your number, never theirs.
 
 Count a phrase with a search across the full history. A pattern no search can count, such as wrong target or too much changed, is counted by reading. Open every prompt the readers cited in its session, list the instances by date in the notes and count the list.
 
+Count each pattern's cost the same way, from the list.
+
 Then check the project for each pattern. Is the rule already written? Is the tool already installed? Does a check that failed still fail when you run it?
 
 Done when every pattern has a number of your own or is dropped.
 
 ## 6. Generate widely
 
-Write every candidate the confirmed patterns suggest into the notes, at least two per pattern on different rungs. Pad to no number. Add three that are out of the box, such as a tool the person has never asked for. Those may be guesses.
+Write every candidate the confirmed patterns suggest into the notes, at least two per pattern on different rungs. Pad to no number.
 
-Give each its evidence, its rung and its size as small, medium or large. Save the list before the next step.
+Then add about five that are out of the box, which no pattern suggested. Those may be guesses. Look for them in these places:
+
+- A rung left empty in **Map what already exists**.
+- An installed skill nobody runs.
+- Work the person does by hand outside the agent, such as recording the screen.
+- A check that projects of this kind usually have.
+
+A variation on a candidate already listed is folded into that candidate and never counted as a guess.
+
+Give each its evidence, its cost, its rung and its size as small, medium or large. A guess carries what in the project prompted it in place of evidence. Save the list before the next step.
 
 Done when every confirmed pattern has candidates or a reason it has none.
 
@@ -123,9 +145,11 @@ Each candidate ends kept, merged into another or cut with its reason.
 
 ## 8. Report and let them pick
 
-Lead with what the history shows in five findings or fewer, each with its number. Then the proposals, strongest evidence first and numbered in one run, so the person can answer "build 1, 2 and 6". Give each one line for what it does and one for its count and a single quote. Mark the ones to confirm first.
+When the notes record an earlier run, open with its scorecard. Name each tool that run built, its pattern's count before and since, and whether to keep it or remove it.
 
-Put the out-of-the-box ideas last, under their own heading. Close with what you would not build and why, what the run could not read and where the working files are.
+Then what the history and the record show in five findings or fewer, each with its number. Then the proposals, costliest first and numbered in one run, so the person can answer "build 1, 2 and 6". Give each one line for what it does and its size, and one for its count, its cost and a single quote. Mark the ones to confirm first.
+
+Put the out-of-the-box ideas last, under their own heading. Give each one line for what it does and one for what in the project prompted it. Close with what you would not build and why, what the run could not read and where the working files are.
 
 ## 9. Build what was picked
 
@@ -141,6 +165,8 @@ Record what was built and what was turned down in the notes. The next run reads 
 | --- | --- |
 | A proposal has no count | Count it across the full history or move it to the guesses |
 | A count in the report came from a reader | Re-count it yourself |
+| The first proposal is a habit that works | Order by cost, not by count |
+| Most full sessions are gone | Count from the project record and label those counts |
 | No proposal comes from a correction | Count the corrections by reading, as **Check the claims** says |
 | Every proposal is a skill | Walk each one down the rungs |
 | A proposal restates a rule the agent docs already carry | Move it up a rung or cut it |

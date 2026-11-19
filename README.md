@@ -1,5 +1,5 @@
 <a href="https://interfaces.dev/">
-  <img width="320" height="168" alt="interfaces.dev" src="https://ho1jr3x2dcwdu3t5.public.blob.vercel-storage.com/og-image.png" />
+  <img width="320" height="168" alt="interfaces.dev" src="https://ho1jr3x2dcwdu3t5.public.blob.vercel-storage.com/og-readme.png" />
 </a>
 
 [![skills.sh](https://skills.sh/b/jakubkrehel/skills)](https://skills.sh/jakubkrehel/skills)
@@ -31,4 +31,4 @@ npx skills add jakubkrehel/skills
 - [**state-machine**](skills/state-machine/SKILL.md): Renders every state of a component you choose on a throwaway page, with mock data and a switcher, so you can work on each state. User-invoked.
 - [**variant**](skills/variant/SKILL.md): Builds multiple **variants** of a component you're working on and helps you iterate and pick one. User-invoked.
 - [**afk**](skills/afk/SKILL.md): Works through a project while you're away, finding **improvements** and **new ideas**, building the best of them on a local branch and leaving a report for when you're back. User-invoked.
-- [**upskill**](skills/upskill/SKILL.md): Studies your past agent sessions on a project and proposes the **skills**, **hooks** and **automations** that would have saved you the most time, then builds the ones you pick. User-invoked.
+- [**upskill**](skills/upskill/SKILL.md): Studies a project and your past agent sessions on it, proposes the **skills**, **hooks** and **automations** that would have saved you the most time, then builds the ones you pick. User-invoked.
