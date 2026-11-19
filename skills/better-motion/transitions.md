@@ -1,6 +1,6 @@
-# Animations
+# Transitions
 
-Recipes for interruptible transitions, press feedback, first-render behavior, theme switches and the reduced-motion fallback. Staged entrances and exits live in [enter-exit.md](enter-exit.md), and icon swaps in [icon-transitions.md](icon-transitions.md).
+Recipes for interruptible transitions, press feedback, a shared spring, first-render behavior, theme switches and the reduced-motion fallback. Staged entrances and exits live in [enter-exit.md](enter-exit.md), and icon swaps in [icon-transitions.md](icon-transitions.md).
 
 ## Interruptible animations
 
@@ -14,7 +14,7 @@ Recipes for interruptible transitions, press feedback, first-render behavior, th
 /* Good: clicking again mid-animation reverses smoothly */
 .drawer {
   transform: translateX(-100%);
-  transition: transform 200ms ease-out;
+  transition: transform 350ms ease-out;
 }
 .drawer.open {
   transform: translateX(0);
@@ -22,7 +22,7 @@ Recipes for interruptible transitions, press feedback, first-render behavior, th
 
 /* Bad: closing mid-animation snaps */
 .drawer.open {
-  animation: slideIn 200ms ease-out forwards;
+  animation: slideIn 350ms ease-out forwards;
 }
 ```
 
@@ -56,6 +56,8 @@ Recipes for interruptible transitions, press feedback, first-render behavior, th
 </motion.button>
 ```
 
+`:enabled` never matches a link. A button that can render as `<a>` uses `:not(:disabled):active`, or `not-disabled:active:` in Tailwind 4.
+
 ### Static prop pattern
 
 Where the button has no variant API to carry the opt-out, apply the scale class conditionally on a `static` prop:
@@ -81,6 +83,16 @@ function Button({ static: isStatic, className, children, ...props }) {
 // Usage
 <Button>Click me</Button>           {/* scales on press */}
 <Button static>Submit</Button>       {/* no scale */}
+```
+
+## One transition for the surface
+
+`MotionConfig` sets the default transition for every `motion` element inside it. A child overrides it only where it differs, as a tab indicator at `0.4` does:
+
+```tsx
+<MotionConfig transition={{ type: "spring", duration: 0.3, bounce: 0 }}>
+  <Dialog />
+</MotionConfig>
 ```
 
 ## Skip animation on page load

@@ -86,7 +86,7 @@ Rendered text uses typographic characters, never their keyboard stand-ins. Curly
 
 Set `text-underline-position: from-font` and `text-decoration-thickness: from-font`, or tune `text-underline-offset` and thickness by hand. A dotted `text-decoration-style` hints that a word carries extra information, such as an abbreviation or a defined term. See the [underline recipes](details-and-accessibility.md#underlines).
 
-Color is the only part of a real underline that animates reliably. Any other underline animation needs a separate element, and its motion is `better-ui`'s.
+Color is the only part of a real underline that animates reliably. Any other underline animation needs a separate element, and its motion is `better-motion`'s.
 
 ## Inputs at 16px on mobile
 

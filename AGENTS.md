@@ -4,7 +4,7 @@ This file is the single source of guidance for coding agents working in this rep
 
 ## What this repository is
 
-A collection of agent skills for building great product interfaces (typography, colors, UI polish), distributed two ways: via `npx skills add jakubkrehel/skills` and as the Claude Code plugin `interfaces` served by the marketplace in this same repository. It is documentation, with no build, lint or test tooling.
+A collection of agent skills for building great product interfaces (typography, colors, UI polish, motion), distributed two ways: via `npx skills add jakubkrehel/skills` and as the Claude Code plugin `interfaces` served by the marketplace in this same repository. It is documentation, with no build, lint or test tooling.
 
 `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` define the plugin and its marketplace. Both are named `interfaces`, so plugin users invoke skills as `/interfaces:better-interface` while skills-CLI users invoke `/better-interface`. Skills are discovered from `skills/` automatically, so adding a skill needs no manifest change. Bump `version` in `plugin.json` in the same commit as any change under `skills/`. That number is the only signal plugin users update on. `claude plugin update` compares it and nothing else, so a change shipped without a bump reports "already at the latest version" and never reaches them. Run `claude plugin validate .` and `claude plugin validate .claude-plugin/plugin.json` after touching either manifest.
 
@@ -77,7 +77,8 @@ A user-invoked skill may invoke model-invoked skills, but it can never reach ano
 | `better-writing` | Source wording, terminology, voice, tone, labels, errors, empty-state copy and the confirm-or-undo rule for destructive actions |
 | `better-typography` | Visual text rendering, type systems, font behavior, wrapping mechanics, punctuation and text-level bidi behavior |
 | `better-colors` | Palette structure and step roles, palette construction, color token naming, color notation, gamut, rendered-pair contrast measurement and color remediation |
-| `better-ui` | Optional visual polish: surfaces, icons including directional icon mirroring, hover gating and motion aesthetics after the underlying interaction is sound |
+| `better-ui` | Optional visual polish: surfaces, icons including directional icon mirroring and hover gating, after the underlying interaction is sound |
+| `better-motion` | Whether an element animates, the duration, easing, scale and distance it takes, enters and exits, icon swaps, shared layout animation, animated height, drag feel, transition performance and reviewing motion slowed down |
 
 When a concern crosses domains, keep the rule in the owner above and let other skills name only the handoff or secondary effect. In particular:
 
@@ -85,7 +86,9 @@ When a concern crosses domains, keep the rule in the owner above and let other s
 - `better-accessibility` owns semantic heading structure; `better-typography` owns how heading levels render visually.
 - `better-layout` owns logical CSS properties and spatial mirroring; `better-typography` owns language metadata, punctuation and mixed-direction text.
 - `better-typography` owns truncation mechanics; `better-layout` owns whether the surrounding layout has room or an expansion affordance; `better-writing` owns the source copy.
-- `better-accessibility` owns reduced-motion requirements; `better-ui` owns the optional animation recipe used when motion is appropriate.
+- `better-accessibility` owns reduced-motion requirements; `better-motion` owns the animation recipe used when motion is appropriate.
+- `better-accessibility` owns the single-pointer alternative every drag needs; `better-motion` owns how the drag itself feels.
+- `better-ui` owns how an icon looks in each state; `better-motion` owns the cross-fade between two of them.
 - `interface-review` owns what to review when the scope is a diff; `better-interface` owns how that review is routed, ranked, consolidated and reported. The dependency runs one way: `interface-review` hands its scope and statuses up, and `better-interface` ranks, caps and issues the verdict. Neither file may restate the other's rules.
 - `interface-review` owns the blast radius of a change under review and caps how far it expands. `afk` owns proving its own commits broke nothing, and it looks at every surface, because nobody reviews its branch before the person does and it cannot start a user-invoked skill.
 - `explain-interface` owns treating a fetched page as untrusted input. `afk` carries its own statement of that rule for the sources it reads, since it runs unattended and ships without its sibling.
