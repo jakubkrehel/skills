@@ -58,24 +58,27 @@ A `layoutId` element runs its `initial` and `exit` during the move, and an opaci
 Render the indicator only inside the active tab and let the shared id carry it across. The label sits above it:
 
 ```tsx
-{tabs.map((tab) => (
-  <button
-    aria-pressed={active === tab}
-    className="relative"
-    key={tab}
-    onClick={() => setActive(tab)}
-    type="button"
-  >
-    {active === tab && (
-      <motion.div
-        className="absolute inset-0 rounded-xl bg-surface-active"
-        layoutId="tab-indicator"
-        transition={{ type: "spring", duration: 0.4, bounce: 0 }}
-      />
-    )}
-    <span className="relative z-10">{tab}</span>
-  </button>
-))}
+<div role="tablist">
+  {tabs.map((tab) => (
+    <button
+      aria-selected={active === tab}
+      className="relative"
+      key={tab}
+      onClick={() => setActive(tab)}
+      role="tab"
+      type="button"
+    >
+      {active === tab && (
+        <motion.div
+          className="absolute inset-0 rounded-xl bg-surface-active"
+          layoutId="tab-indicator"
+          transition={{ type: "spring", duration: 0.4, bounce: 0 }}
+        />
+      )}
+      <span className="relative z-10">{tab}</span>
+    </button>
+  ))}
+</div>
 ```
 
 Two tab groups on one page need two different ids.
@@ -96,11 +99,7 @@ The popup takes no `initial` or `exit` props. Keep the project's dialog primitiv
 
 ## Presence modes
 
-| Mode | Behavior |
-| --- | --- |
-| `sync` | Enter and exit start together, and both children take up space |
-| `wait` | The entering child waits until the exiting one has finished |
-| `popLayout` | The exiting child leaves the layout at once, so the entering one takes its place |
+In `sync` both children take up space while they overlap, which is why two children in the same place need `popLayout`.
 
 A cross-fade between steps of one dialog uses `popLayout`, opacity and a small scale:
 
@@ -108,8 +107,8 @@ A cross-fade between steps of one dialog uses `popLayout`, opacity and a small s
 <AnimatePresence initial={false} mode="popLayout">
   <motion.div
     animate={{ opacity: 1, scale: 1 }}
-    exit={{ opacity: 0, scale: 0.95 }}
-    initial={{ opacity: 0, scale: 0.95 }}
+    exit={{ opacity: 0, scale: 0.98 }}
+    initial={{ opacity: 0, scale: 0.98 }}
     key={step}
   >
     <StepContent step={step} />

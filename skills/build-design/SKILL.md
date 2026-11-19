@@ -9,7 +9,7 @@ This skill turns a design into code that matches it. It reads the design at its 
 
 The design decides. Values come from the design file, never from your taste or a pattern you liked elsewhere. A change the design does not show is a deviation, and a deviation is the user's call.
 
-It owns no domain rules. Where the design breaks one, build it as designed and report the conflict with its owner. Contrast is a requirement in `better-accessibility` and a measurement in `better-colors`. Focus and semantics are `better-accessibility`, type is `better-typography` and spacing and structure are `better-layout`. Palette is `better-colors`, copy is `better-writing` and surfaces, icons and motion are `better-ui`. Reviewing finished work is `interface-review`, exploring alternatives is `variant` and stress testing a component is `break`.
+It owns no domain rules. Where the design breaks one, build it as designed and report the conflict with its owner. Contrast is a requirement in `better-accessibility` and a measurement in `better-colors`. Focus and semantics are `better-accessibility`, type is `better-typography` and spacing and structure are `better-layout`. Palette is `better-colors`, copy is `better-writing`, surfaces and icons are `better-ui` and motion is `better-motion`. Reviewing finished work is `interface-review`, exploring alternatives is `variant` and stress testing a component is `break`.
 
 ## 1. Read the design at its source
 

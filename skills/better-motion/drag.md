@@ -51,14 +51,16 @@ Keep the snap points and the threshold as named pixel constants. They are the va
 
 ## Actions revealed by distance
 
-Reveal each action as the row passes its own threshold, never all at once. Read the motion value into state and compare:
+Reveal each action as the row passes its own threshold, never all at once. Store how many actions are showing and never the raw offset, so the row re-renders only as it crosses a threshold:
 
 ```tsx
-const [offset, setOffset] = useState(0);
-useMotionValueEvent(x, "change", setOffset);
+const [revealed, setRevealed] = useState(0);
+useMotionValueEvent(x, "change", (latest) => {
+  setRevealed(latest > 88 ? 2 : latest > 44 ? 1 : 0);
+});
 
-<ActionButton isVisible={offset > 44} label="Set reminder" />
-<ActionButton isVisible={offset > 88} label="Mark as unread" />
+<ActionButton isVisible={revealed >= 1} label="Set reminder" />
+<ActionButton isVisible={revealed >= 2} label="Mark as unread" />
 ```
 
 ```tsx
