@@ -14,6 +14,12 @@ These skills cover topics that I write about on [my personal website](https://ja
 npx skills add jakubkrehel/skills
 ```
 
+Or install them with the GitHub CLI:
+
+```bash
+gh skill install jakubkrehel/skills
+```
+
 ## Skills that help build great interfaces
 
 - [**better-interface**](skills/better-interface/SKILL.md): Reviews a screen, flow or whole interface across **accessibility**, **layout**, **writing**, **typography**, **color**, **UI polish** and **motion**, and returns one ranked report.
